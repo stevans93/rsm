@@ -4,6 +4,11 @@
 
 p, span, label, input {
     color: #232349;
+    font-size: 15px;
+}
+
+a {
+    cursor: pointer;
 }
 
 input:-webkit-autofill{
@@ -13,6 +18,7 @@ input:-webkit-autofill{
 .shadowBorder {
     box-shadow: 0px 1px 50px 5px #A3C8DB99;
 }
+
 
 .spin {
     position: absolute;

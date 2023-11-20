@@ -93,7 +93,7 @@ function Login() {
 
                             <button type="submit" className="py-2 rounded-full bg-primary text-[#fff]">Prijavite se</button>
                             <div className="text-center">
-                                <Link><span>Zaboravili ste lozinku?</span></Link>
+                                <Link><span onClick={() => window.location.href = "/map"}>Zaboravili ste lozinku?</span></Link>
                             </div>
                         </form>
                     </div>
