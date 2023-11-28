@@ -7,28 +7,30 @@ import { BounceLoader } from 'react-spinners';
 function Dashboard() {
 
     const [isLoading, setIsLoading] = useState(true);
+  const [showGlobalLoader, setShowGlobalLoader] = useState(true);
 
-    useEffect(() => {
-        setIsLoading(true);
-
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 1500);
-    }, []);
+  useEffect(() => {
+    // Simulate an API call or any other async operation
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowGlobalLoader(false); // Set to false after loading completes
+    }, 1500);
+  }, []);
 
     return (
         <>
-            {isLoading ? (
-                <div className="w-full h-[100vh]">
-                    <BounceLoader color="#A3C8DB" className="spin" />
-                </div>
-            ) : (
-                <div className="flex flex-col md:flex-row bg-[#F0F5F7] w-[100%]">
-                    <DashboardSidebar />
-                    <Outlet />
-                </div>
-            )}
-        </>
+      {showGlobalLoader && (
+        <div className="w-full h-[100vh]">
+          <BounceLoader color="#A3C8DB" className="spin" />
+        </div>
+      )}
+      {!isLoading && (
+        <div className="flex flex-col md:flex-row bg-[#F0F5F7]">
+          <DashboardSidebar />
+          <Outlet />
+        </div>
+      )}
+    </>
 
         
     );

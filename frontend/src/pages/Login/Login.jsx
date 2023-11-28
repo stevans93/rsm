@@ -1,18 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import logo from '../../assets/Logo.png';
 import mapa from '../../assets/map icon.png';
+import { useDispatch } from 'react-redux';
 import { MdEmail } from "react-icons/md";
 import { IoIosLock } from "react-icons/io";
 import { MdOutlineVisibility } from "react-icons/md";
 import { MdOutlineVisibilityOff } from "react-icons/md";
-import {BounceLoader} from "react-spinners";
+import { BounceLoader } from "react-spinners";
+import UserService from '../../services/userService';
+import { loginUser } from '../../store/userSlice';
 
 function Login() {
     const [isVisible, setSsVisible] = useState(true);
     let [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(true);
@@ -41,7 +47,54 @@ function Login() {
         }),
 
         onSubmit: (values) => {
-            console.log(values);
+            UserService.loginUser(values).
+                then((res) => {
+                    if(res.status === 200) {
+                        toast.success('Korisnik se uspešno prijavio...', {
+                            position: "top-right",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+
+                        setIsLoading(true);
+                        
+                        setTimeout(() => {
+                          localStorage.setItem('rsm_token', res.data.token);
+                          dispatch(loginUser(res.data.user));
+                          navigate('/map');
+                          setIsLoading(false);
+                        }, 3000)
+                        
+                      } else {
+                        toast.warning('Korisnik nije prijavljen...', {
+                          position: "top-right",
+                          autoClose: 2000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+                      }
+                })
+                .catch((err) => {
+                    toast.error(err.response.data.msg, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                      });
+                })
 
             formik.resetForm();
         }
@@ -91,9 +144,9 @@ function Login() {
                             </div>
 
 
-                            <button type="submit" className="py-2 rounded-full bg-primary text-[#fff]">Prijavite se</button>
+                            <button type="submit" className="py-2 rounded-full bg-primary text-[#fff] hover:bg-secondMain hover:border-secondMain">Prijavite se</button>
                             <div className="text-center">
-                                <Link><span onClick={() => window.location.href = "/map"}>Zaboravili ste lozinku?</span></Link>
+                                <Link><span>Zaboravili ste lozinku?</span></Link>
                             </div>
                         </form>
                     </div>

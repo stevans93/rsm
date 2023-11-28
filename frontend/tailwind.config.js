@@ -18,6 +18,7 @@ export default {
       red: 'rgb(220 38 38)',
       grey: '#A8A8A8',
       lightGray: '#F8F8F8',
+      spanGray: '#9E9E9E',
     }
   },
   plugins: [],

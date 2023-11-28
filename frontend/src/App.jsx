@@ -1,18 +1,47 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation.jsx";
 import React, { useEffect, useState } from "react";
 import { BounceLoader } from "react-spinners";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import { restoreUser } from "./store/userSlice.js";
+
+axios.defaults.baseURL = "http://localhost:4000/api";
+
+axios.interceptors.request.use((config) => {
+    if(localStorage.hasOwnProperty("rsm_token")) {
+        config.headers.Authorization = localStorage.getItem("rsm_token");
+    }
+
+    return config;
+});
+
+axios.interceptors.response.use(undefined, (error) => {
+    console.log(error);
+});
 
 function App() {
 
   let [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
     useEffect(() => {
+        const user = localStorage.getItem('rsm_user');
+
+        if(user) {
+            navigate("/map");
+        }
+        
         setIsLoading(true);
 
         setTimeout(() => {
             setIsLoading(false);
         }, 1500);
+
+        dispatch(restoreUser(JSON.parse(localStorage.getItem('rsm_user'))));
     }, []);
 
     return (
@@ -24,6 +53,7 @@ function App() {
             ) : (
               <div className="flex flex-col bg-[#F0F5F7] h-[100vh]">
                 <Navigation />
+                <ToastContainer />
                 <Outlet />
             </div>
             )}
