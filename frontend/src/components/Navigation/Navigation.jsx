@@ -48,7 +48,7 @@ function Navigation() {
     return (
         <div className="rounded-2xl shadow bg-[#fff] px-[20px] py-[10px] mx-[20px] mt-[20px]">
 
-            <div className="mt-4">
+            <div>
                 <div className="flex justify-center md:hidden">
                     <TfiMenu className="text-3xl cursor-pointer" onClick={handleDropDown}/>
                 </div>
