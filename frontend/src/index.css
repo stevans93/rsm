@@ -57,6 +57,29 @@ input:-webkit-autofill{
 .divActive {
     background: #A3C8DB;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Promenite boju i prozirnost po potrebi */
+    z-index: 1000; /* Postavite odgovarajući z-index iznad drugih elemenata */
+  }
+  
+  .overlay.hidden {
+    display: none;
+  }
+  
+  .overlay.visible {
+    display: block;
+  }
+  
+  .overlay-visible {
+    z-index: 0;
+  }
+  
    
 @keyframes lds-dual-ring {
     0% {
