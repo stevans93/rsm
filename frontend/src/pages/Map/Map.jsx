@@ -7,10 +7,11 @@ function Map() {
   const [hoveredPath, setHoveredPath] = useState(null);
   const [activePaths, setActivePaths] = useState({});
   const [selectedPathId, setSelectedPathId] = useState(null);
+  const [selectedTitle, setSelectedTitle] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const mapContainerRef = useRef(null);
 
-  const handlePathClick = (event, pathId) => {
+  const handlePathClick = (event, pathId, title) => {
     setActivePaths((prevActivePaths) => {
       const newActivePaths = {};
 
@@ -20,6 +21,8 @@ function Map() {
 
       newActivePaths[pathId] = !prevActivePaths[pathId];
       setSelectedPathId(newActivePaths[pathId] ? pathId : null);
+
+      setSelectedTitle(title);
 
       return newActivePaths;
     });
@@ -61,7 +64,7 @@ function Map() {
                   id={path.id}
                   stroke={path.stroke}
                   fill={hoveredPath === path.id || selectedPathId === path.id ? '#A3C8DB' : '#fff'}
-                  onClick={(event) => handlePathClick(event, path.id)}
+                  onClick={(event) => handlePathClick(event, path.id, path.title)}
                   onMouseOver={() => handlePathHover(path.id)}
                   onMouseOut={handlePathLeave}
                 />
@@ -71,13 +74,13 @@ function Map() {
         </div>
   
         <div className='w-[20%]'>
-          {selectedPathId && <MapSideBar setIsVisible={setIsVisible} isVisible={isVisible} selectedPathId={selectedPathId} onClose={() => setSelectedPathId(null)} />}
+          {selectedPathId && <MapSideBar selectedTitle={selectedTitle} setIsVisible={setIsVisible} isVisible={isVisible} selectedPathId={selectedPathId} onClose={() => setSelectedPathId(null)} />}
         </div>
   
       </div>
   
       <div className={`absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] ${isVisible ? 'block' : 'hidden'} `}>
-        {selectedPathId && <InfoAboutTheCity selectedPathId={selectedPathId} />}
+        {selectedPathId && <InfoAboutTheCity selectedPathId={selectedPathId} onClose={() => setSelectedPathId(null)} />}
       </div>
       
     </div>

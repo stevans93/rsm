@@ -12,6 +12,7 @@ import Map from "./pages/Map/Map.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import DashboardSettings from "./pages/Dashboard/DashboardPages/DashboardSettings/DashboardSettings.jsx";
 import DashboardCityList from './pages/Dashboard/DashboardPages/DashboardCityList/DashboardCityList.jsx';
+import DashboardCityBelgrade from './pages/Dashboard/DashboardPages/DashboardCityBelgrade/DashboardCityBelgrade.jsx';
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: "cityList",
                 element: <DashboardCityList />
+            },
+            {
+                path: 'cityBelgrade',
+                element: <DashboardCityBelgrade />
             }
         ]
     }

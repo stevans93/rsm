@@ -7,7 +7,7 @@ import { storeAllMunicipalities } from '../../../../store/municipalitySlice';
 import { FaRegUserCircle } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
 
-function DashboardCityListDesktop({municipalities}) {
+function DashboardCityBelgradeDesktop({municipalities}) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,7 +18,13 @@ function DashboardCityListDesktop({municipalities}) {
             .catch((err) => {
                 console.log(err);
             })
-    }, [dispatch])
+    }, [dispatch]);
+
+    const filterMunicipalities = (district) => {
+        return municipalities.filter((municipality) => municipality.district === district);
+    }
+
+    const belgradeMunicipalities = filterMunicipalities('Grad Beograd');
   return (
     <div className='desktop'>
         <div className='table-responsive'>
@@ -40,7 +46,8 @@ function DashboardCityListDesktop({municipalities}) {
                             </tr>
                         </thead>
                         <tbody>
-                            {municipalities.map((municipality) => {
+                            {belgradeMunicipalities.map((municipality) => {
+                                console.log(municipality);
                                 return (
                             <tr key={municipality._id} className='bg-[#fff] border-b-2 border-main p-[50px]'>
                                 <td className='px-6 py-6'>{municipality.district}</td>
@@ -54,7 +61,7 @@ function DashboardCityListDesktop({municipalities}) {
                                         <FaRegUserCircle size={32} />
                                     )}
                                 </td>
-                                <td className='text-main px-6 py-6'><BsThreeDotsVertical /></td>
+                                <td className='text-main px-6 py-6 text-center text-[20px]'><BsThreeDotsVertical /></td>
                             </tr>
                                 )
                             })}
@@ -78,4 +85,4 @@ function DashboardCityListDesktop({municipalities}) {
   )
 }
 
-export default DashboardCityListDesktop;
+export default DashboardCityBelgradeDesktop;

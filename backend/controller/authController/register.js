@@ -7,9 +7,10 @@ const register = async (req, res) => {
     const { email, password } = req.body;
     const reqBody = req.body;
 
-    let isExist = await UserModel.findOne({email});
+    console.log("Password:", password);
+    console.log("Body:",reqBody);
 
-    console.log(reqBody);
+    let isExist = await UserModel.findOne({email});
 
     if(isExist > 0) {
         res.status(httpStatus.EXIST.status).send(httpStatus.EXIST.send);
@@ -23,7 +24,7 @@ const register = async (req, res) => {
 
             newUser.save()
                 .then((user) => {
-                    res.status(200).json();
+                    res.status(200).json(user);
                 })
                 .catch((error) => {
                     res.status(httpStatus.SERVICE_ERROR.status).send(error.message)

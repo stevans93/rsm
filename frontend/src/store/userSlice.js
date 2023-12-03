@@ -20,9 +20,12 @@ const userSlice = createSlice({
             state.user = {};
             localStorage.removeItem("rsm_user");
             localStorage.removeItem("rsm_token");
+        },
+        storeAllUsers: (state, action) => {
+            state.user = action.payload;
         }
     }
 });
 
-export const { loginUser, restoreUser, logOutUser } = userSlice.actions;
+export const { loginUser, restoreUser, logOutUser, storeAllUsers } = userSlice.actions;
 export default userSlice.reducer;

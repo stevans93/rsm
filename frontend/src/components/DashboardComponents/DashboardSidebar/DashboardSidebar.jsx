@@ -6,10 +6,11 @@ import {TfiMenu} from "react-icons/tfi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { PiUsersThree } from "react-icons/pi";
 import {FaCity, FaUserCircle} from "react-icons/fa";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser } from '../../../store/userSlice';
 
 function DashboardSidebar() {
+    const user = JSON.parse(localStorage.getItem('rsm_user'));
     const [dropDown, setDropDown] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -45,14 +46,15 @@ function DashboardSidebar() {
                         <NavLink to="/dashboard/" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><IoSettingsOutline /> Podešavanja</NavLink>
                         <NavLink to="/dashboard/userList" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><PiUsersThree /> Lista Korisnika</NavLink>
                         <NavLink to="/dashboard/cityList" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><FaCity /> Lista Opština</NavLink>
+                        <NavLink to="/dashboard/cityBelgrade" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><FaCity /> Grad Beograd</NavLink>
                     </div>
                 </div>
                 <div className="flex flex-col gap-8">
                     <div className="flex gap-3">
                         <FaUserCircle className="text-main text-[50px] mx-auto" />
                         <div className="flex flex-col justify-center">
-                            <p className="text-main font-bold">Stevan Stevanovic</p>
-                            <span className="text-[12px] text-grey">Admin</span>
+                            <p className="text-main font-bold">{user?.firstName} {user?.lastName}</p>
+                            <span className="text-[12px] text-grey">{user.title ? user.title : "Korisnik"}</span>
                         </div>
                     </div>
                     <div className='flex text-center'>
@@ -70,6 +72,7 @@ function DashboardSidebar() {
                     <NavLink to="/dashboard/" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Podešavanja</NavLink>
                     <NavLink to="/dashboard/userList" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Lista Korisnika</NavLink>
                     <NavLink to="/dashboard/cityList" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Lista Opština</NavLink>
+                    <NavLink to="/dashboard/cityBelgrade" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Grad Beograd</NavLink>
                     <button onClick={handleLogOut} className="border border-2 rounded-2xl px-[30px] py-[5px] border-red text-red hover:bg-red hover:text-[#fff]">Odjavi se</button>
                 </div>
             </div>

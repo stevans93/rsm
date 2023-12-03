@@ -3,32 +3,45 @@ import { TbUserSquareRounded } from "react-icons/tb";
 import { MdArrowForward } from "react-icons/md";
 import { VscKey } from "react-icons/vsc";
 import { PiUsersThree } from "react-icons/pi";
+import { FaInfo } from "react-icons/fa";
+
 import DashboardSettingsProfile from '../../../../components/DashboardComponents/DashboardSettingsComponents/DashboardSettingsProfile/DashboardSettingsProfile';
-import { NavLink } from 'react-router-dom';
 import DashboardSettingsPassword from '../../../../components/DashboardComponents/DashboardSettingsComponents/DashboardSettingsPassword/DashboardSettingsPassword';
 import DashboardSettingsUser from '../../../../components/DashboardComponents/DashboardSettingsComponents/DashboardSettingsUser/DashboardSettingsUser';
+import DashboardSettingsInfo from '../../../../components/DashboardComponents/DashboardSettingsComponents/DashboardSettingsInfo/DashboardSettingsInfo';
 
 function DashboardSettingsDesktop() {
     const user = JSON.parse(localStorage.getItem('rsm_user'));
     const [showProfile, setShowProfile] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showUser, setShowUser] = useState(false);
+    const [showInfo, setShowInfo] = useState(false);
     const [activeItem, setActiveItem] = useState(null);
 
     const handleProfileClick = () => {
         setShowProfile(true);
         setShowPassword(false);
         setShowUser(false);
+        setShowInfo(false)
     }
 
     const handlePasswordClick = () => {
         setShowPassword(true);
         setShowProfile(false);
         setShowUser(false);
+        setShowInfo(false)
     }
 
     const handleUserClick = () => {
         setShowUser(true);
+        setShowPassword(false);
+        setShowProfile(false);
+        setShowInfo(false)
+    }
+
+    const handleInfoClick = () => {
+        setShowInfo(true)
+        setShowUser(false);
         setShowPassword(false);
         setShowProfile(false);
     }
@@ -77,6 +90,16 @@ function DashboardSettingsDesktop() {
                         </div>
                         <MdArrowForward className={`text-3xl arrow ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`} />
                     </div>
+                    <div className={`flex w-[350px] justify-between border border-1 border-[#D6D9D9] items-center p-3 rounded-3xl divHover ${activeItem === 'info' ? 'bg-main' : ''}`} onClick={() => { handleItemClick('info'); handleInfoClick() }}>
+                        <div className='flex items-center gap-5'>
+                            <FaInfo className='text-5xl text-main bg-[#fff] rounded-xl' />
+                            <div>
+                                <p className={`text-[24px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`} >Podaci</p>
+                                <span className={`text-[12px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-spanGray'}`} >Dodavanje Podataka</span>
+                            </div>
+                        </div>
+                        <MdArrowForward className={`text-3xl arrow ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`} />
+                    </div>
                 </div>
             </div>
 
@@ -84,6 +107,7 @@ function DashboardSettingsDesktop() {
                 {showProfile && <DashboardSettingsProfile />}
                 {showPassword && <DashboardSettingsPassword />}
                 {showUser && <DashboardSettingsUser />}
+                {showInfo && <DashboardSettingsInfo />}
             </div>
         </div>
     </div>

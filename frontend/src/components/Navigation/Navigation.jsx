@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 
 function Navigation() {
-    const { user } = useSelector(state => state.userStore);
+    const user = JSON.parse(localStorage.getItem('rsm_user'));
     const [dropDown, setDropDown] = useState(false);
     const dropDownRef = useRef(null);
     const dispatch = useDispatch();

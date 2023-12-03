@@ -18,9 +18,9 @@ axios.interceptors.request.use((config) => {
     return config;
 });
 
-axios.interceptors.response.use(undefined, (error) => {
-    console.log(error);
-});
+// axios.interceptors.response.use(undefined, (error) => {
+//     console.log(error);
+// });
 
 function App() {
 

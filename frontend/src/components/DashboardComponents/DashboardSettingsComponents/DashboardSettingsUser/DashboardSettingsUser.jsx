@@ -5,11 +5,11 @@ import * as Yup from 'yup';
 import UserService from '../../../../services/userService';
 
 function DashboardSettingsUser() {
-  const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png'];
-  let KB = 1024;
-  let MB = KB * 1024;
+  // const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png'];
+  // let KB = 1024;
+  // let MB = KB * 1024;
 
-  const [eventImage, setEventImage] = useState(null)
+  // const [eventImage, setEventImage] = useState(null)
 
   const formik = useFormik({
     initialValues: {
@@ -19,7 +19,7 @@ function DashboardSettingsUser() {
       password: '',
       title: '',
       phone: '',
-      image: '',
+      // image: '',
     },
 
     validationSchema: Yup.object({
@@ -29,42 +29,33 @@ function DashboardSettingsUser() {
       password: Yup.string().required('Polje je obavezno...'),
       title: Yup.string().required('Polje je obavezno...'),
       phone: Yup.string().required('Polje je obavezno...'),
-      image: Yup.mixed()
-        .required('Polje je obavezno...')
-        .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
-        .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
+      // image: Yup.mixed()
+      //   .required('Polje je obavezno...')
+      //   .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
+      //   .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
     }),
 
     onSubmit: async (values) => {
-      console.log('Form Values:', values);
-
-      const formData = new FormData();
-      
-      formData.append('image', {eventImage});
-    
-      Object.keys(values).forEach((key) => {
-        if (key !== 'image') {
-          formData.append(key, values[key]);
-        }
-      });
-    
-      console.log('Form Data:', formData);
-    
-      UserService.registerUser(formData)
+      UserService.registerUser(values)
         .then((response) => {
+
           console.log(response);
-    
+
           if (response.status === 200) {
             console.log('Uspešna registracija korisnika..');
           } else {
-            console.log('"Registracija korisnika nije uspela...');
+            console.log('Registracija korisnika nije uspela...');
           }
+
         })
         .catch((error) => {
           console.error('Greška prilikom registracije:', error.message);
+
+          if (error.response) {
+            console.error('Detalji greške:', error.response.data);
+          }
         });
     }
-    
   });
 
   const showError = (name) => formik.errors[name] && formik.touched[name] && formik.errors[name];
@@ -80,21 +71,21 @@ function DashboardSettingsUser() {
       <form onSubmit={formik.handleSubmit} className='flex flex-col mt-[30px]'>
           <div className='flex mb-[30px] gap-5'>
 
-          <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
-            <img id="image-preview" src={formik.values.image ? URL.createObjectURL(formik.values.image) : ''} alt="Preview" className={`w-full h-full object-cover ${formik.values.image ? '' : 'hidden'}`} />
-            {!formik.values.image && (
-              <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
-                <FaUpload />
-                <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
-              </div>
-            )}
-            <input onChange={(e) => { if (e.target.files[0]) { formik.setFieldValue('image', e.target.files[0]); setEventImage(e.target.files[0]); } }} type="file" name="image" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"/>         
-          </label>
+            {/* <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
+              <img id="image-preview" src={formik.values.image ? URL.createObjectURL(formik.values.image) : ''} alt="Preview" className={`w-full h-full object-cover ${formik.values.image ? '' : 'hidden'}`} />
+              {!formik.values.image && (
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
+                  <FaUpload />
+                  <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
+                </div>
+              )}
+              <input onChange={(e) => { if (e.target.files[0]) { formik.setFieldValue('image', e.target.files[0]); setEventImage(e.target.files[0]); } }} type="file" name="image" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"/>         
+            </label> */}
 
             <div>
               <h3 className='text-[16px]'>Profilna Slika</h3>
               <span className='text-[10px] text-spanGray'>Profilna slika maksimalna veličina do 10MB</span><br />
-              <span className='text-red italic text-[13px]'>{showError('image')}</span>
+              {/* <span className='text-red italic text-[13px]'>{showError('image')}</span> */}
             </div>
 
           </div>
@@ -104,34 +95,34 @@ function DashboardSettingsUser() {
               <div className='flex  flex-col gap-4 w-[50%]'>
                 <div className='flex flex-col items-center xl:items-start justify-between'>
                   <label>Ime {' '} <span className='text-red italic text-[13px]'>{showError('firstName')}</span></label>
-                  <input value={formik.values.firstName} onChange={formik.handleChange} type="text" name='firstName' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]' placeholder='Unesite ime...'/>
+                  <input value={formik.values.firstName} onChange={formik.handleChange} type="text" name='firstName' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]' placeholder='Unesite Ime...'/>
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
                   <label>Prezime {' '} <span className='text-red italic text-[13px]'>{showError('lastName')}</span></label>
-                  <input value={formik.values.lastName} onChange={formik.handleChange} type="text" name='lastName' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]'/>
+                  <input value={formik.values.lastName} onChange={formik.handleChange} type="text" name='lastName' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]' placeholder='Unesite Prezime...'/>
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
                   <label>Email {' '} <span className='text-red italic text-[13px]'>{showError('email')}</span></label>
-                  <input value={formik.values.email} onChange={formik.handleChange} type="email" name='email' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]'/>
+                  <input value={formik.values.email} onChange={formik.handleChange} type="email" name='email' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]' placeholder='Unesite Email...'/>
                 </div>
               </div>
 
               <div className='flex flex-col gap-4 w-[50%]'>
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
                   <label>Pozicija {' '} <span className='text-red italic text-[13px]'>{showError('title')}</span></label>
-                  <input value={formik.values.title} onChange={formik.handleChange} type="text" name='title' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]'/>
+                  <input value={formik.values.title} onChange={formik.handleChange} type="text" name='title' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]' placeholder='Unesite Poziciju...'/>
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
                   <label>Lozinka {' '} <span className='text-red italic text-[13px]'>{showError('password')}</span></label>
-                  <input value={formik.values.password} onChange={formik.handleChange} type="password" name='password' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]'/>
+                  <input value={formik.values.password} onChange={formik.handleChange} type="password" name='password' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]' placeholder='Unesite Lozinku...'/>
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
                   <label>Telefon {' '} <span className='text-red italic text-[13px]'>{showError('phone')}</span></label>
-                  <input value={formik.values.phone} onChange={formik.handleChange} type="text" name='phone' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]'/>
+                  <input value={formik.values.phone} onChange={formik.handleChange} type="text" name='phone' className='border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]' placeholder='Unesite Telefon...'/>
                 </div>
               </div>
             </div>
