@@ -5,7 +5,7 @@ const MunicipalitySchema = new Schema({
     municipality: {type: String, default: ""},
     city: {type: String, default: ""},
     fullNameOfThePresident: {type: String, default: ""},
-    pictureOfThePresident: {type: String, default: ""},
+    image: {type: String, default: ""},
     dateOfBirth: {type: String, default: ""},
     email: {type: String, default: ""},
     phone: {type: String, default: ""},

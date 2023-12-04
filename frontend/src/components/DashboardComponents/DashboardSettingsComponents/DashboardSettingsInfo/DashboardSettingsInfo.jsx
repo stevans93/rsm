@@ -5,11 +5,9 @@ import * as Yup from 'yup';
 import MunicipalityService from '../../../../services/municipalityService';
 
 function DashboardSettingsInfo() {
-  // const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png'];
-  // let KB = 1024;
-  // let MB = KB * 1024;
-
-  // const [eventImage, setEventImage] = useState(null)
+  const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png'];
+  let KB = 1024;
+  let MB = KB * 1024;
 
   const formik = useFormik({
     initialValues: {
@@ -20,10 +18,10 @@ function DashboardSettingsInfo() {
         dateOfBirth: '',
         email: '',
         phone: '',
-        moreAboutThePresident: '',
+        numberOfOfficials: '',
         website: '',
-        document: '',
-        pictureOfThePresident: '',
+        numberOfApplications: '',
+        image: '',
     },
 
     validationSchema: Yup.object({
@@ -34,17 +32,27 @@ function DashboardSettingsInfo() {
         dateOfBirth: Yup.string().required('Polje je obavezno...'),
         email: Yup.string().required('Polje je obavezno...'),
         phone: Yup.string().required('Polje je obavezno...'),
-        moreAboutThePresident: Yup.string().required('Polje je obavezno...'),
+        numberOfOfficials: Yup.string().required('Polje je obavezno...'),
         website: Yup.string().required('Polje je obavezno...'),
-        document: Yup.string().required('Polje je obavezno...'),
-      // pictureOfThePresident: Yup.mixed()
-      //   .required('Polje je obavezno...')
-      //   .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
-      //   .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
+        numberOfApplications: Yup.string().required('Polje je obavezno...'),
+        image: Yup.mixed()
+          .required('Polje je obavezno...')
+          .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 10)
+          .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
     }),
 
     onSubmit:  (values) => {
-      MunicipalityService.addMunicipality(values)
+      const formData = new FormData();
+
+      formData.append('file', values.image);
+      console.log('1',formData);
+      delete values.image;
+      console.log('2',formData);
+
+      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]));
+      console.log('3',formData);
+
+      MunicipalityService.addMunicipality(formData)
         .then((res) => {
           console.log(res);
         })
@@ -58,7 +66,7 @@ function DashboardSettingsInfo() {
   const showError = (name) => formik.errors[name] && formik.touched[name] && formik.errors[name];
 
   return (
-    <div className='bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[550px] mx-auto dashboard'>
+    <div className='bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[650px] mx-auto dashboard'>
 
       <div className='w-[40%]'>
         <h2 className='text-[22px] text-main'>Dodaj Podatke</h2>
@@ -68,21 +76,35 @@ function DashboardSettingsInfo() {
       <form onSubmit={formik.handleSubmit} className='flex flex-col mt-[30px]'>
           <div className='flex mb-[30px] gap-5'>
 
-          {/* <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
-            <img id="image-preview" src={formik.values.pictureOfThePresident ? URL.createObjectURL(formik.values.pictureOfThePresident) : ''} alt="Preview" className={`w-full h-full object-cover ${formik.values.pictureOfThePresident ? '' : 'hidden'}`} />
-            {!formik.values.pictureOfThePresident && (
+          <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
+            <img
+              id="image-preview"
+              src={formik.values.image ? URL.createObjectURL(formik.values.image) : ''}
+              alt="Preview"
+              className={`w-full h-full object-cover ${formik.values.image ? '' : 'hidden'}`}
+            />
+            {!formik.values.image && (
               <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
                 <FaUpload />
                 <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
               </div>
             )}
-            <input onChange={(e) => { if (e.target.files[0]) { formik.setFieldValue('image', e.target.files[0]); setEventImage(e.target.files[0]); } }} type="file" name="image" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"/>         
-          </label> */}
+            <input
+              onChange={(e) => {
+                if (e.target.files[0]) {
+                  formik.setFieldValue('image', e.target.files[0])
+                }
+              }}
+              type="file"
+              name="image"
+              className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+            />
+          </label>
 
             <div>
               <h3 className='text-[16px]'>Slika Predsednika</h3>
               <span className='text-[10px] text-spanGray'>Profilna slika maksimalna veličina do 10MB</span><br />
-              {/* <span className='text-red italic text-[13px]'>{showError('image')}</span> */}
+              <span className='text-red italic text-[13px]'>{showError('image')}</span>
             </div>
 
           </div>
@@ -128,8 +150,8 @@ function DashboardSettingsInfo() {
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Broj Gradskih/Opstinskih Funkcionera {' '} <span className='text-red italic text-[13px]'>{showError('moreAboutThePresident')}</span></label>
-                  <input value={formik.values.moreAboutThePresident} onChange={formik.handleChange} type="text" name='moreAboutThePresident' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
+                  <label>Broj Gradskih/Opstinskih Funkcionera {' '} <span className='text-red italic text-[13px]'>{showError('numberOfOfficials')}</span></label>
+                  <input value={formik.values.numberOfOfficials} onChange={formik.handleChange} type="text" name='numberOfOfficials' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
@@ -138,8 +160,8 @@ function DashboardSettingsInfo() {
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Broj Predstavki Gradjana {' '} <span className='text-red italic text-[13px]'>{showError('document')}</span></label>
-                  <input value={formik.values.document} onChange={formik.handleChange} type="text" name='document' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
+                  <label>Broj Predstavki Gradjana {' '} <span className='text-red italic text-[13px]'>{showError('numberOfApplications')}</span></label>
+                  <input value={formik.values.numberOfApplications} onChange={formik.handleChange} type="text" name='numberOfApplications' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
                 </div>
               </div>
             </div>

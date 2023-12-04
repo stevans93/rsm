@@ -9,9 +9,7 @@ import {useFormik} from 'formik'
 function DashboardSettingsUser() {
   const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
   let KB = 1024
-  let MB = KB * 1024 * 10
-
-  // const [eventImage, setEventImage] = useState(null)
+  let MB = KB * 1024;
 
   const formik = useFormik({
     initialValues: {
@@ -33,26 +31,17 @@ function DashboardSettingsUser() {
       phone: Yup.string().required('Polje je obavezno...'),
       image: Yup.mixed()
         .required('Polje je obavezno...')
-        .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
+        .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 10)
         .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
     }),
 
     onSubmit: async (values) => {
-      console.log('RADI0')
+      const formData = new FormData();
 
-      const formData = new FormData()
-      console.log('RADI')
-      formData.append('file', values.image)
-      delete values.image
+      formData.append('file', values.image);
+      delete values.image;
 
-      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]))
-      console.log('RADI2')
-
-      console.log(' formData.getAll()')
-      console.log(formData.get('firstName'))
-
-      console.log(values.image)
-      console.log('RADI3')
+      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]));
 
       UserService.registerUser(formData)
         .then((response) => {

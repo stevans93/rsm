@@ -53,8 +53,8 @@ function DashboardCityListDesktop({municipalities}) {
                                     <td className='px-6 py-3'>{municipality.city}</td>
                                     <td className='px-6 py-3'>{municipality.fullNameOfThePresident}</td>
                                     <td className='px-6 py-3'>
-                                        {municipality.pictureOfThePresident ? (
-                                            <img src={`${municipality.pictureOfThePresident}`} alt={municipality.fullNameOfThePresident} className='w-[40px] h-[40px]'/>
+                                        {municipality.image ? (
+                                            <img src={`${municipality.image}`} alt={municipality.fullNameOfThePresident} className='w-[40px] h-[40px]'/>
                                             ) : (
                                             <FaRegUserCircle size={32} />
                                         )}
