@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs')
 const mongoose = require('mongoose');
 const { DB_URL, PORT, CORS_OPTIONS } = require('./config/config');
 const server = express();
@@ -14,7 +15,10 @@ mongoose.connect(DB_URL)
         console.log(error);
     });
 
-server.use(express.json({ limit: '10mb'}));
+
+fs.mkdirSync(process.env.MEDIA_LOCATION, { recursive: true });
+
+server.use(express.json({ limit: '10mb' }));
 
 server.use('/api', require('./routes'))
 
