@@ -1,8 +1,8 @@
 const UserModel = require('../../models/userModel');
 
-const getAllUsers = (req, res) => {
+const uploadImage = (req, res) => {
   console.log(res.file)
   res.status(200).json('uploaded')
 }
 
-module.exports = getAllUsers;
+module.exports = uploadImage;
