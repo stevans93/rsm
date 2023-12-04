@@ -6,8 +6,13 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FaUpload } from "react-icons/fa";
+import UserService from "../../services/userService";
 
 function SearchUser() {
+  const VALID_TYPE = ["image/jpeg", "image/jpg", "image/png"];
+  let KB = 1024;
+  let MB = KB * 1024;
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -24,20 +29,51 @@ function SearchUser() {
       // profileImage: '',
     },
 
-    validate: {
-      firstName: Yup.string().required("Polje je obavezno..."),
-      lastName: Yup.string().required("Polje je obavezno..."),
-      email: Yup.string().required("Polje je obavezno..."),
-      title: Yup.string().required("Polje je obavezno..."),
-      phone: Yup.string().required("Polje je obavezno..."),
-      // profileImage: Yup.mixed()
-      //   .required('Polje je obavezno...')
-      //   .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
-      //   .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
-    },
+    // validationSchema: {
+    //   firstName: Yup.string().required("Polje je obavezno..."),
+    //   lastName: Yup.string().required("Polje je obavezno..."),
+    //   email: Yup.string().required("Polje je obavezno..."),
+    //   title: Yup.string().required("Polje je obavezno..."),
+    //   phone: Yup.string().required("Polje je obavezno..."),
+    //   image: Yup.mixed()
+    //     .required("Polje je obavezno...")
+    //     .test(
+    //       "fileSize",
+    //       "Wrong file size",
+    //       (value) => value && value.size < MB * 10
+    //     )
+    //     .test(
+    //       "fileType",
+    //       "Wrong file type",
+    //       (value) => value && VALID_TYPE.includes(value.type)
+    //     ),
+    // },
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const formData = new FormData();
+
+      formData.append("file", values.image);
+      delete values.image;
+
+      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]));
+
+      UserService.registerUser(formData)
+        .then((response) => {
+          console.log(response);
+
+          if (response.status === 200) {
+            console.log("Uspešna registracija korisnika..");
+          } else {
+            console.log("Registracija korisnika nije uspela...");
+          }
+        })
+        .catch((error) => {
+          console.error("Greška prilikom registracije:", error.message);
+
+          if (error.response) {
+            console.error("Detalji greške:", error.response.data);
+          }
+        });
     },
   });
 
@@ -243,6 +279,7 @@ function SearchUser() {
               </div>
 
               <button
+                onClick={handleOpen}
                 type="submit"
                 className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]"
               >
