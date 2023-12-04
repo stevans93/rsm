@@ -14,18 +14,14 @@ function Map() {
   const [selectedPathId, setSelectedPathId] = useState(null)
   const [selectedTitle, setSelectedTitle] = useState(null)
   const [selectedMunicipality, setSelectedMunicipality] = useState([])
+  const [selectedMunicipalityInfo, setSelectedMunicipalityInfo] = useState(null)
   const [isInfoVisible, setIsInfoVisible] = useState(false)
   const mapContainerRef = useRef(null)
   const dispatch = useDispatch()
   const {municipalities} = useSelector((state) => state.municipalityStore)
 
   const handlePathClick = (event, pathId, title) => {
-    console.log('pathId, title')
-    console.log(pathId, title)
-    console.log(municipalities)
     const clickedMunicipality = municipalities?.filter((municipality) => municipality.district === title)
-
-    console.log('ClickedMunicipality:', clickedMunicipality)
 
     setActivePaths((prevActivePaths) => {
       const newActivePaths = {...prevActivePaths}
@@ -58,10 +54,6 @@ function Map() {
   }
 
   const handlePathHover = (pathId, pathTitle) => {
-    console.log('pathId')
-    console.log(pathId)
-    console.log('pathTitle')
-    console.log(pathTitle)
     setHoveredPath(pathId)
     setHoveredTitle(pathTitle)
   }
@@ -70,8 +62,16 @@ function Map() {
     setHoveredPath(null)
   }
 
-  const handleToggleInfo = () => {
-    setIsInfoVisible(!isInfoVisible)
+  const handleToggleInfo = (selectedMunicipality) => {
+    const clickedMunicipality =
+      municipalities?.find((municipality) => municipality.municipality === selectedMunicipality) ?? null
+
+    setSelectedMunicipalityInfo(clickedMunicipality)
+    setIsInfoVisible(true)
+  }
+
+  const closeModal = () => {
+    setIsInfoVisible(false)
   }
 
   useEffect(() => {
@@ -107,7 +107,7 @@ function Map() {
           </svg>
 
           {hoveredTitle && (
-            <div className="absolute font-bold text-main shadow top-0 right-[450px] bg-[#fff] p-2 rounded-2xl">
+            <div className="absolute text-2xl font-bold text-main shadow top-0 right-[450px] bg-[#fff] p-4 rounded-2xl">
               {hoveredTitle}
             </div>
           )}
@@ -124,7 +124,11 @@ function Map() {
 
       {isInfoVisible && (
         <div className={`absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] `}>
-          <InfoAboutTheCity handleToggleInfo={handleToggleInfo} />
+          <InfoAboutTheCity
+            handleToggleInfo={handleToggleInfo}
+            cityInfo={selectedMunicipalityInfo}
+            closeModal={closeModal}
+          />
         </div>
       )}
     </div>

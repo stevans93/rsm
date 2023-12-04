@@ -5,7 +5,6 @@ import React, {useEffect, useState} from 'react'
 
 import {BounceLoader} from 'react-spinners'
 import Navigation from './components/Navigation/Navigation.jsx'
-import {ToastContainer} from 'react-toastify'
 import axios from 'axios'
 import {restoreUser} from './store/userSlice.js'
 import {useDispatch} from 'react-redux'
@@ -54,7 +53,6 @@ function App() {
       ) : (
         <div className="flex flex-col bg-[#F0F5F7] h-[100vh]">
           <Navigation />
-          <ToastContainer />
           <Outlet />
         </div>
       )}
