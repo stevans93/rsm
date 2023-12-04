@@ -13,7 +13,7 @@ function MapSideBar({handleToggleInfo, selectedTitle, selectedMunicipality}) {
               .filter((item) => item.district === selectedTitle)
               .map((item) => (
                 <span key={item._id} className="flex p-3 ">
-                  <button className=" border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
+                  <button className="w-full border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
                     {item.municipality}
                   </button>
                 </span>

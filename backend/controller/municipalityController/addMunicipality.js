@@ -8,7 +8,7 @@ const addMunicipality = (req, res) => {
     console.log("files", file)
 
 
-    const addNewMunicipality = new MunicipalityModel(municipality);
+    const addNewMunicipality = new MunicipalityModel({ ...municipality, image: file.filename });
 
     addNewMunicipality.save()
         .then((addNewMunicipality) => {
