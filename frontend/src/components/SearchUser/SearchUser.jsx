@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { FaUpload } from "react-icons/fa";
 import UserService from "../../services/userService";
 
-function SearchUser() {
+function SearchUser(props) {
   const VALID_TYPE = ["image/jpeg", "image/jpg", "image/png"];
   let KB = 1024;
   let MB = KB * 1024;
@@ -17,6 +17,11 @@ function SearchUser() {
 
   const handleOpen = () => {
     setOpen(!open);
+  };
+
+  const handlePageSizeChange = (event) => {
+    const newSize = parseInt(event.target.value, 10);
+    props.setPageSize(newSize);
   };
 
   const formik = useFormik({
@@ -93,10 +98,13 @@ function SearchUser() {
           </button>
 
           <span className="text-[13px]">Show</span>
-          <select className="border border-1 rounded-full text-center bg-[#fff] px-3 py-1">
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
+          <select
+            className="border border-1 rounded-full text-center bg-[#fff] px-3 py-1"
+            onChange={handlePageSizeChange}
+            defaultValue={10}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
           </select>
         </div>
 

@@ -1,21 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchUser from "../../../../components/SearchUser/SearchUser";
 import UserService from "../../../../services/userService";
 import { useDispatch } from "react-redux";
 import { storeAllUsers } from "../../../../store/usersSlice";
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 
 function DashboardUserListDesktop({ users }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    UserService.getAllUsers()
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState();
+  const [totalUsers, setTotalUsers] = useState();
+
+  const fetchData = () => {
+    UserService.getAllUsers(pageNumber, pageSize)
       .then((res) => {
-        dispatch(storeAllUsers(res.data));
+        dispatch(storeAllUsers(res.data.users));
+        setTotalPages(res.data.totalPages);
+        setTotalUsers(res.data.totalUsers);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [pageNumber, pageSize]);
+
+  const handlePageChange = (newPageNumber) => {
+    setPageNumber(newPageNumber);
+  };
+
+  const handlePrevPage = () => {
+    if (pageNumber > 1) {
+      handlePageChange(pageNumber - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (pageNumber < totalPages) {
+      handlePageChange(pageNumber + 1);
+    }
+  };
+
   return (
     <div className="desktop">
       <div>
@@ -23,7 +53,7 @@ function DashboardUserListDesktop({ users }) {
           <h2 className="text-[40px] font-bold mb-[50px]">Lista Korisnika</h2>
         </div>
         <div>
-          <SearchUser />
+          <SearchUser setPageSize={setPageSize} />
         </div>
         <div>
           <div className="mt-[30px] w-[100%] rounded-xl !bg-[#fff] p-2 shadowBorder">
@@ -58,7 +88,7 @@ function DashboardUserListDesktop({ users }) {
                   return (
                     <tr key={user._id} className="">
                       <td className="px-6 py-3 border-r border-b border-[#00000029]">
-                        {i + 1}
+                        {(pageNumber - 1) * pageSize + (i + 1)}
                       </td>
                       <td className="px-6 py-3 border-r border-b border-[#00000029]">
                         {user.firstName}
@@ -83,6 +113,26 @@ function DashboardUserListDesktop({ users }) {
                 })}
               </tbody>
             </table>
+            <div className="flex w-full bg-white justify-between px-4 py-2">
+              <div className="flex">
+                <span>
+                  {users.length} of {totalUsers}
+                </span>
+              </div>
+              <div className="flex justify-center">
+                <span>
+                  {pageNumber} of {totalPages}
+                </span>
+              </div>
+              <div className="flex justify-end gap-2">
+                <button onClick={handlePrevPage}>
+                  <FaArrowLeft />
+                </button>
+                <button onClick={handleNextPage}>
+                  <FaArrowRight />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
