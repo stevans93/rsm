@@ -58,7 +58,7 @@ function DashboardSettingsInfo() {
   const showError = (name) => formik.errors[name] && formik.touched[name] && formik.errors[name];
 
   return (
-    <div className='bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[500px] mx-auto dashboard'>
+    <div className='bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[550px] mx-auto dashboard'>
 
       <div className='w-[40%]'>
         <h2 className='text-[22px] text-main'>Dodaj Podatke</h2>
@@ -87,7 +87,7 @@ function DashboardSettingsInfo() {
 
           </div>
 
-          <div className='flex flex-col items-center'>
+          <div className='flex flex-col items-center w-full'>
             <div className='flex flex-col lg:flex-row items-center lg:items-start justify-between gap-5 w-[100%]'>
               <div className='flex  flex-col gap-4 w-[50%]'>
                 <div className='flex flex-col items-center xl:items-start justify-between'>
@@ -128,7 +128,7 @@ function DashboardSettingsInfo() {
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Vise o Predsedniku {' '} <span className='text-red italic text-[13px]'>{showError('moreAboutThePresident')}</span></label>
+                  <label>Broj Gradskih/Opstinskih Funkcionera {' '} <span className='text-red italic text-[13px]'>{showError('moreAboutThePresident')}</span></label>
                   <input value={formik.values.moreAboutThePresident} onChange={formik.handleChange} type="text" name='moreAboutThePresident' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
                 </div>
 
@@ -138,7 +138,7 @@ function DashboardSettingsInfo() {
                 </div>
 
                 <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Dokument {' '} <span className='text-red italic text-[13px]'>{showError('document')}</span></label>
+                  <label>Broj Predstavki Gradjana {' '} <span className='text-red italic text-[13px]'>{showError('document')}</span></label>
                   <input value={formik.values.document} onChange={formik.handleChange} type="text" name='document' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
                 </div>
               </div>

@@ -9,9 +9,9 @@ const MunicipalitySchema = new Schema({
     dateOfBirth: {type: String, default: ""},
     email: {type: String, default: ""},
     phone: {type: String, default: ""},
-    moreAboutThePresident: {type: String, default: ""},
+    numberOfOfficials: {type: String, default: ""},
     website: {type: String, default: ""},
-    document: {type: String, default: ""},
+    numberOfApplications: {type: String, default: ""},
 });
 
 const MunicipalityModel = model('municipalities', MunicipalitySchema);
