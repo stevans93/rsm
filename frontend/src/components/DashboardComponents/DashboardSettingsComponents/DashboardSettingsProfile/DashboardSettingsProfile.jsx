@@ -46,7 +46,7 @@ function DashboardSettingsProfile() {
     <div className={`!bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[500px] mx-auto dashboard`} >
 
       <div className='w-[50%]'>
-        <h2 className='text-[22px] text-main'>Profil</h2>
+        <h2 className='text-[22px] text-main'>Administrator</h2>
         <p className='text-[10px] text-spanGray'>Podešavanja vaseg profila možete uraditi ovde ovo je vidljivo samo vama.</p>
       </div>
 
@@ -71,8 +71,8 @@ function DashboardSettingsProfile() {
             )}
             
             <div>
-              <h3 className='text-[16px]'>Profilna Slika</h3>
-              <span className='text-[10px] text-spanGray'>Profilna slika maksimalna veličina do 10MB</span>
+              <h3 className='text-[16px]'>Slika Administratora</h3>
+              <span className='text-[10px] text-spanGray'>Slika administratora maksimalna veličina do 10MB</span>
             </div>
           </div>
 

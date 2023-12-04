@@ -16,8 +16,7 @@ axios.interceptors.request.use((config) => {
   if (localStorage.hasOwnProperty('rsm_token')) {
     config.headers.Authorization = localStorage.getItem('rsm_token')
   }
-  config.headers['Content-Type'] = 'multipart/form-data'
-
+  
   return config
 })
 

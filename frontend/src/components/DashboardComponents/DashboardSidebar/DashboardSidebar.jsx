@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {Link, NavLink, useNavigate} from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
-import logo from '../../../assets/Logo.png';
+import logo from '../../../assets/Logo-compress.png';
 import {TfiMenu} from "react-icons/tfi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { PiUsersThree } from "react-icons/pi";
@@ -35,7 +35,7 @@ function DashboardSidebar() {
         <div className="bg-[#F0F0F0] md:bg-[#fff] sm:w-[30%] md:w-[40%] lg:w-[20%] sm:fixed">
             <div className="h-[100svh] px-5 py-10 hidden md:flex md:flex-col items-center md:justify-between">
                 <div className="flex flex-col gap-10">
-                    <div className="flex items-center gap-[60px]">
+                    <div className="flex justify-between items-center">
                         <Link to='/map' onClick={(e) => e.stopPropagation()} className='flex items-center bg-[#F0F0F0] hover:bg-[#A8A8A8] rounded-full px-5 py-1 text-center'><IoIosArrowBack /> Mapa</Link>
                         <img src={logo} alt="logo" className="w-[70px]" />
                     </div>
@@ -43,10 +43,12 @@ function DashboardSidebar() {
                         <p className="text-main text-center text-2xl font-bold">KONTROLNA TABLA</p>
                     </div>
                     <div className="flex flex-col items-start gap-3">
-                        <NavLink to="/dashboard/" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><IoSettingsOutline /> Podešavanja</NavLink>
-                        <NavLink to="/dashboard/userList" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><PiUsersThree /> Lista Korisnika</NavLink>
-                        <NavLink to="/dashboard/cityList" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><FaCity /> Lista Opština</NavLink>
-                        <NavLink to="/dashboard/cityBelgrade" className="flex justify-center items-center text-main gap-3 text-[23px] border border-2 rounded-full w-[100%] py-2 border-main text-main hover:bg-main hover:text-[#fff]"><FaCity /> Grad Beograd</NavLink>
+                        <NavLink to="/dashboard/" className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"><IoSettingsOutline /> Podešavanja</NavLink>
+                        <NavLink to="/dashboard/userList" className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"><PiUsersThree /> Lista Funkcionera</NavLink>
+                        <NavLink to="/dashboard/cityList" className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"><FaCity /> Lista Gradova/Opština</NavLink>
+                        <NavLink to="/dashboard/cityBelgrade" className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"><FaCity /> Beograd Opština</NavLink>
+                        <button className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"><FaCity />RSG Baza</button>
+                        <button className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">Beograd Gradski Funkcioneri</button>
                     </div>
                 </div>
                 <div className="flex flex-col gap-8">
@@ -70,9 +72,11 @@ function DashboardSidebar() {
                 <div ref={dropDownRef} className="flex flex-col gap-3 overflow-hidden transition-max-h duration-300 ease-in md:hidden">
                     <Link to='/map' onClick={(e) => e.stopPropagation()} className="flex justify-center items-center bg-[#F0F0F0] hover:bg-[#A8A8A8] rounded-full px-5 py-[5px] text-center"><IoIosArrowBack /> Mapa</Link>
                     <NavLink to="/dashboard/" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Podešavanja</NavLink>
-                    <NavLink to="/dashboard/userList" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Lista Korisnika</NavLink>
-                    <NavLink to="/dashboard/cityList" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Lista Opština</NavLink>
-                    <NavLink to="/dashboard/cityBelgrade" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Grad Beograd</NavLink>
+                    <NavLink to="/dashboard/userList" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Lista Funkcionera</NavLink>
+                    <NavLink to="/dashboard/cityList" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Lista Gradova/Opština</NavLink>
+                    <NavLink to="/dashboard/cityBelgrade" className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Beograd Opština</NavLink>
+                    <button className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">RSG Baza</button>
+                    <button className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">Beograd Gradski Funkcioneri</button>
                     <button onClick={handleLogOut} className="border border-2 rounded-2xl px-[30px] py-[5px] border-red text-red hover:bg-red hover:text-[#fff]">Odjavi se</button>
                 </div>
             </div>
