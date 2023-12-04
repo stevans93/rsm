@@ -1,10 +1,10 @@
 const sharp = require('sharp');
-const config = require('../config/config');
+const { MEDIA_LOCATION } = require('../config/config');
 const fs = require('fs');
 const path = require('path');
 
 const deleteFiles = (toDelete) => {
-  const deletePath = config.UPLOAD_DIR;
+  const deletePath = MEDIA_LOCATION;
 
   toDelete?.forEach((f) => {
     try {
@@ -16,25 +16,24 @@ const deleteFiles = (toDelete) => {
 };
 
 const compressImages = async (req, res, next) => {
-  if (!req.files) {
+  if (!req.file) {
     return next();
   }
-
+  const file = req.file
   try {
-    for (const f of req.files) {
-      const ext = path.extname(f.originalname);
-
-      if (ext === '.jpeg' || ext === '.jpg' || ext === '.png') {
-        await sharp(f.buffer)
-          .toFormat('jpeg')  // Postavite format na JPEG da bi se oba formata obrađivala na isti način
-          .jpeg({ quality: 50 })
-          .toFile(`${config.UPLOAD_DIR}/C${f.filename}`);
-      }
+    console.log(`${MEDIA_LOCATION}/C${file.filename}`)
+    const ext = path.extname(file.originalname);
+    if (ext === '.jpeg' || ext === '.jpg' || ext === '.png') {
+      await sharp(file.buffer)
+        .toFormat('jpeg')  // Postavite format na JPEG da bi se oba formata obrađivala na isti način
+        .jpeg({ quality: 80 })
+        .toFile(`${MEDIA_LOCATION}/C${file.filename}`);
     }
 
-    const deletedImages = req.files?.map((f) => f.filename) ?? [];
+
+    const deletedImages = [file.filename] ?? [];
     deleteFiles(deletedImages);
-    req.files.forEach((f) => (f.filename = `C${f.filename}`));
+    req.file.filename = `C${file.filename}`;
   } catch (error) {
     console.error('Greška pri komprimiranju slika:', error.message);
   }
