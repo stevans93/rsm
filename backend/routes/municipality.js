@@ -6,6 +6,4 @@ router.get('/all', require('../controller/municipalityController/getAllMunicipal
 
 router.post('/add', require('../controller/municipalityController/addMunicipality'));
 
-router.post('/addBelgrade', require('../controller/municipalityController/addMunicipalityToBelgrade'));
-
 module.exports = router;

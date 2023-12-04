@@ -3,12 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const municipalitySlice = createSlice({
     name: "municipalities",
     initialState: {
+        totalPages: 0,
         municipalities: [],
     },
 
     reducers: {
         storeAllMunicipalities: (state, action) => { 
-             state.municipalities = action.payload;
+            state.totalPages = action.payload.totalPages;
+            state.municipalities = action.payload.municipalities;
         }
     }
 });

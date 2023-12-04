@@ -2,7 +2,7 @@ import React from 'react';
 import img from '../../assets/Dragan_Markovic_Palma.jpg'
 import { RxCross1 } from "react-icons/rx";
 
-function InfoAboutTheCity({onClose}) {
+function InfoAboutTheCity({handleToggleInfo}) {
   return (
     <div className='bg-[#fff] w-[720px] h-[320px] rounded-2xl shadow p-[30px]'>
 
@@ -14,7 +14,7 @@ function InfoAboutTheCity({onClose}) {
                     <p className='text-[12px] text-spanGray'>Okrug: Pomoravski Okrug</p>
                 </div>
                 <div className='absolute top-5 right-5'>
-                    <div className='border border-2 p-1 rounded-2xl text-spanGray hover:text-main' onClick={onClose}>
+                    <div className='border border-2 p-1 rounded-2xl text-spanGray hover:text-main' onClick={handleToggleInfo}>
                         <RxCross1 />
                     </div>
                 </div>

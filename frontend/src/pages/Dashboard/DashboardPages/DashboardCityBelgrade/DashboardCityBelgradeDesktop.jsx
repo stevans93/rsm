@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchCity from '../../../../components/SearchCity/SearchCity';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { IoIosArrowBack, IoIosArrowForward  } from "react-icons/io";
@@ -6,83 +6,96 @@ import MunicipalityService from '../../../../services/municipalityService';
 import { storeAllMunicipalities } from '../../../../store/municipalitySlice';
 import { FaRegUserCircle } from "react-icons/fa";
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function DashboardCityBelgradeDesktop({municipalities}) {
     const dispatch = useDispatch();
+    const { totalPages } = useSelector(state => state.municipalityStore);
+    const [currentPage, setCurrentPage] = useState(1);
+    const perPage = 2;
+
+    console.log('total: ', totalPages);
 
     useEffect(() => {
-        MunicipalityService.allMunicipalities()
+        MunicipalityService.allMunicipalities(currentPage, perPage)
             .then((res) => {
+                console.log(res.data);
                 dispatch(storeAllMunicipalities(res.data));
             })
             .catch((err) => {
                 console.log(err);
-            })
-    }, [dispatch]);
-
+            });
+    }, [dispatch, currentPage, perPage]);
+    
     const filterMunicipalities = (district) => {
         return municipalities.filter((municipality) => municipality.district === district);
     }
 
     const belgradeMunicipalities = filterMunicipalities('Grad Beograd');
-  return (
-    <div className='desktop'>
-        <div className='table-responsive'>
-            <div className='flex justify-between items-center mb-[50px]'>
-                <h2 className='text-[40px] font-bold'>Lista Opština</h2>
-                <SearchCity />
-            </div>
-            <div>
+
+    return (
+        <div className='desktop'>
+            <div className='table-responsive'>
+                <div className='flex justify-between items-center mb-[50px]'>
+                    <h2 className='text-[40px] font-bold'>Lista Opština</h2>
+                    <SearchCity />
+                </div>
                 <div>
-                    <table className='text-start shadowBorder w-[100%] text-[14px]'>
-                        <thead>
-                            <tr className='text-left bg-[#F0F5F7] p-[50px] border-b-2 border-main' >
-                                <th className='px-6 py-6'>Region</th>
-                                <th className='px-6 py-6'>Opština</th>
-                                <th className='px-6 py-6'>Grad</th>
-                                <th className='px-6 py-6'>Predsednik</th>
-                                <th className='px-6 py-6'>Slika</th>
-                                <th className='px-6 py-6'>Akcija</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {belgradeMunicipalities.map((municipality) => {
-                                console.log(municipality);
-                                return (
-                            <tr key={municipality._id} className='bg-[#fff] border-b-2 border-main p-[50px]'>
-                                <td className='px-6 py-6'>{municipality.district}</td>
-                                <td className='px-6 py-6'>{municipality.municipality}</td>
-                                <td className='px-6 py-6'>{municipality.city}</td>
-                                <td className='px-6 py-6'>{municipality.fullNameOfThePresident}</td>
-                                <td className='px-6 py-6'>
-                                    {municipality.pictureOfThePresident ? (
-                                        <img src={`${municipality.pictureOfThePresident}`} alt={municipality.fullNameOfThePresident} />
+                    <div>
+                        <table className='text-start shadowBorder w-[100%] text-[14px]'>
+                            <thead>
+                                <tr className='text-left bg-[#F0F5F7] p-[50px] border-b-2 border-main' >
+                                    <th className='px-6 py-6'>Region</th>
+                                    <th className='px-6 py-6'>Opština</th>
+                                    <th className='px-6 py-6'>Grad</th>
+                                    <th className='px-6 py-6'>Predsednik</th>
+                                    <th className='px-6 py-6'>Slika</th>
+                                    <th className='px-6 py-6'>Akcija</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {belgradeMunicipalities.map((municipality) => {
+                                    return (
+                                <tr key={municipality._id} className='bg-[#fff] border-b-2 border-main p-[50px]'>
+                                    <td className='px-6 py-3'>{municipality.district}</td>
+                                    <td className='px-6 py-3'>{municipality.municipality}</td>
+                                    <td className='px-6 py-3'>{municipality.city}</td>
+                                    <td className='px-6 py-3'>{municipality.fullNameOfThePresident}</td>
+                                    <td className='px-6 py-3'>
+                                        {municipality.pictureOfThePresident ? (
+                                            <img src={`${municipality.pictureOfThePresident}`} alt={municipality.fullNameOfThePresident} className='w-[40px] h-[40px]'/>
+                                            ) : (
+                                            <FaRegUserCircle size={32} />
+                                        )}
+                                    </td>
+                                    <td className='text-main px-6 py-3 text-center text-[20px]'><BsThreeDotsVertical /></td>
+                                </tr>
+                                    )
+                                })}
+                                
+                            </tbody>
+                            <tfoot>
+                                <tr className='align-middle'>
+                                    <td className='px-6 py-6'>Rows per page: {perPage}</td>
+                                    <td className='px-6 py-6 text-center' colSpan="4">
+                                        {belgradeMunicipalities.length === 0 ? (
+                                            `0 of 0`
                                         ) : (
-                                        <FaRegUserCircle size={32} />
-                                    )}
-                                </td>
-                                <td className='text-main px-6 py-6 text-center text-[20px]'><BsThreeDotsVertical /></td>
-                            </tr>
-                                )
-                            })}
-                            
-                        </tbody>
-                        <tfoot>
-                            <tr className='align-middle'>
-                                <td className='px-6 py-6'>Rows per page: 10</td>
-                                <td className='px-6 py-6 text-center' colSpan="4">1-10 of 198</td>
-                                <td className='flex it px-6 py-6 align-middle'>
-                                    <IoIosArrowBack className='text-[22px]'/>
-                                    <IoIosArrowForward className='text-[22px]'/>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                            `${currentPage} of ${totalPages}`
+                                        )}
+                                    </td>
+                                    <td className='flex it px-6 py-6 align-middle'>
+                                        <IoIosArrowBack className='text-[22px]' onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))} />
+                                        <IoIosArrowForward className='text-[22px]' onClick={() => setCurrentPage((prev) => prev + 1)} />
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default DashboardCityBelgradeDesktop;
