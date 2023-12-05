@@ -67,14 +67,14 @@ function DashboardSidebar() {
             <NavLink
               to="/dashboard/cityBelgrade"
               className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
-              <FaCity /> Beograd Opština
+              <FaCity /> Beogradske Opštine
             </NavLink>
+            <button className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
+              Beograd Gradski Funkcioneri
+            </button>
             <button className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
               <FaCity />
               RSG Baza
-            </button>
-            <button className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
-              Beograd Gradski Funkcioneri
             </button>
           </div>
         </div>
@@ -131,7 +131,7 @@ function DashboardSidebar() {
           <NavLink
             to="/dashboard/cityBelgrade"
             className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
-            Beograd Opština
+            Beogradske Opštine
           </NavLink>
           <button className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
             RSG Baza

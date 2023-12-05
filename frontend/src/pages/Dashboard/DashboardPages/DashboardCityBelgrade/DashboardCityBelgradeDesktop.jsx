@@ -30,7 +30,7 @@ function DashboardCityBelgradeDesktop({municipalities2}) {
     <div className="desktop">
       <div className="table-responsive">
         <div className="flex justify-between items-center mb-[50px]">
-          <h2 className="text-[40px] font-bold">Beograd Opština</h2>
+          <h2 className="text-[40px] font-bold">Beogradske Opštine</h2>
           <SearchCity />
         </div>
         <div>
