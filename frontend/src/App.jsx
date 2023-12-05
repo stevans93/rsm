@@ -1,50 +1,50 @@
-import 'react-toastify/dist/ReactToastify.css'
+import "react-toastify/dist/ReactToastify.css";
 
-import {Outlet, useNavigate} from 'react-router-dom'
-import React, {useEffect, useState} from 'react'
+import { Outlet, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-import {BounceLoader} from 'react-spinners'
-import Navigation from './components/Navigation/Navigation.jsx'
-import {ToastContainer} from 'react-toastify'
-import axios from 'axios'
-import {restoreUser} from './store/userSlice.js'
-import {useDispatch} from 'react-redux'
+import { BounceLoader } from "react-spinners";
+import Navigation from "./components/Navigation/Navigation.jsx";
+import { ToastContainer } from "react-toastify";
+import axios from "axios";
+import { restoreUser } from "./store/userSlice.js";
+import { useDispatch } from "react-redux";
 
-axios.defaults.baseURL = 'http://localhost:4000/api'
+axios.defaults.baseURL = "http://localhost:4000/api";
 
 axios.interceptors.request.use((config) => {
-  if (localStorage.hasOwnProperty('rsm_token')) {
-    config.headers.Authorization = localStorage.getItem('rsm_token')
+  if (localStorage.hasOwnProperty("rsm_token")) {
+    config.headers.Authorization = localStorage.getItem("rsm_token");
   }
-  config.headers['Content-Type'] = 'multipart/form-data'
+  // config.headers['Content-Type'] = 'multipart/form-data'
 
-  return config
-})
+  return config;
+});
 
 // axios.interceptors.response.use(undefined, (error) => {
 //     console.log(error);
 // });
 
 function App() {
-  let [isLoading, setIsLoading] = useState(true)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  let [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const user = localStorage.getItem('rsm_user')
+    const user = localStorage.getItem("rsm_user");
 
     if (user) {
-      navigate('/map')
+      navigate("/map");
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
+      setIsLoading(false);
+    }, 1500);
 
-    dispatch(restoreUser(JSON.parse(localStorage.getItem('rsm_user'))))
-  }, [])
+    dispatch(restoreUser(JSON.parse(localStorage.getItem("rsm_user"))));
+  }, []);
 
   return (
     <>
@@ -60,7 +60,7 @@ function App() {
         </div>
       )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

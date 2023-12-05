@@ -1,56 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { FaUpload } from "react-icons/fa";
-import {useFormik} from 'formik';
-import * as Yup from 'yup';
-import MunicipalityService from '../../../../services/municipalityService';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import MunicipalityService from "../../../../services/municipalityService";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
-function DashboardSettingsInfo() {
-  const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png'];
+function DashboardSettingsInfo({ showCloseBtn, setShowEditModal }) {
+  const VALID_TYPE = ["image/jpeg", "image/jpg", "image/png"];
   let KB = 1024;
   let MB = KB * 1024;
 
   const formik = useFormik({
     initialValues: {
-        district: '',
-        municipality: '',
-        city: '',
-        fullNameOfThePresident: '',
-        dateOfBirth: '',
-        email: '',
-        phone: '',
-        numberOfOfficials: '',
-        website: '',
-        numberOfApplications: '',
-        image: '',
+      district: "",
+      municipality: "",
+      city: "",
+      fullNameOfThePresident: "",
+      dateOfBirth: "",
+      email: "",
+      phone: "",
+      numberOfOfficials: "",
+      website: "",
+      numberOfApplications: "",
+      image: "",
     },
 
     validationSchema: Yup.object({
-        district: Yup.string().required('Polje je obavezno...'),
-        municipality: Yup.string().required('Polje je obavezno...'),
-        city: Yup.string().required('Polje je obavezno...'),
-        fullNameOfThePresident: Yup.string().required('Polje je obavezno...'),
-        dateOfBirth: Yup.string().required('Polje je obavezno...'),
-        email: Yup.string().required('Polje je obavezno...'),
-        phone: Yup.string().required('Polje je obavezno...'),
-        numberOfOfficials: Yup.string().required('Polje je obavezno...'),
-        website: Yup.string().required('Polje je obavezno...'),
-        numberOfApplications: Yup.string().required('Polje je obavezno...'),
-        image: Yup.mixed()
-          .required('Polje je obavezno...')
-          .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 10)
-          .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
+      district: Yup.string().required("Polje je obavezno..."),
+      municipality: Yup.string().required("Polje je obavezno..."),
+      city: Yup.string().required("Polje je obavezno..."),
+      fullNameOfThePresident: Yup.string().required("Polje je obavezno..."),
+      dateOfBirth: Yup.string().required("Polje je obavezno..."),
+      email: Yup.string().required("Polje je obavezno..."),
+      phone: Yup.string().required("Polje je obavezno..."),
+      numberOfOfficials: Yup.string().required("Polje je obavezno..."),
+      website: Yup.string().required("Polje je obavezno..."),
+      numberOfApplications: Yup.string().required("Polje je obavezno..."),
+      image: Yup.mixed()
+        .required("Polje je obavezno...")
+        .test(
+          "fileSize",
+          "Wrong file size",
+          (value) => value && value.size < MB * 10
+        )
+        .test(
+          "fileType",
+          "Wrong file type",
+          (value) => value && VALID_TYPE.includes(value.type)
+        ),
     }),
 
-    onSubmit:  (values) => {
+    onSubmit: (values) => {
       const formData = new FormData();
 
-      formData.append('file', values.image);
-      console.log('1',formData);
+      formData.append("file", values.image);
+      console.log("1", formData);
       delete values.image;
-      console.log('2',formData);
+      console.log("2", formData);
 
       Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]));
-      console.log('3',formData);
+      console.log("3", formData);
 
       MunicipalityService.addMunicipality(formData)
         .then((res) => {
@@ -59,40 +68,57 @@ function DashboardSettingsInfo() {
         .catch((err) => {
           console.log(err);
         });
-    }
-
+    },
   });
 
-  const showError = (name) => formik.errors[name] && formik.touched[name] && formik.errors[name];
+  const showError = (name) =>
+    formik.errors[name] && formik.touched[name] && formik.errors[name];
 
   return (
-    <div className='bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[650px] mx-auto dashboard'>
+    <div className="bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[650px] mx-auto dashboard">
+      {showCloseBtn ? (
+        <div className="w-full flex justify-end items-center">
+          <button type="button" onClick={() => setShowEditModal(false)}>
+            <IoMdCloseCircleOutline className="text-[1.5rem] text-main" />
+          </button>
+        </div>
+      ) : null}
+      <div className="w-[40%]">
+        <h2 className="text-[22px] text-main">Dodaj Podatke</h2>
 
-      <div className='w-[40%]'>
-        <h2 className='text-[22px] text-main'>Dodaj Podatke</h2>
-        <p className='text-[10px] text-spanGray'>Dodavanje Podataka Okruga, Opštine, Grada i Predsednika možete dodati ovde.</p>
+        <p className="text-[10px] text-spanGray">
+          Dodavanje Podataka Okruga, Opštine, Grada i Predsednika možete dodati
+          ovde.
+        </p>
       </div>
 
-      <form onSubmit={formik.handleSubmit} className='flex flex-col mt-[30px]'>
-          <div className='flex mb-[30px] gap-5'>
-
+      <form onSubmit={formik.handleSubmit} className="flex flex-col mt-[30px]">
+        <div className="flex mb-[30px] gap-5">
           <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
             <img
               id="image-preview"
-              src={formik.values.image ? URL.createObjectURL(formik.values.image) : ''}
+              src={
+                formik.values.image
+                  ? URL.createObjectURL(formik.values.image)
+                  : ""
+              }
               alt="Preview"
-              className={`w-full h-full object-cover ${formik.values.image ? '' : 'hidden'}`}
+              className={`w-full h-full object-cover ${
+                formik.values.image ? "" : "hidden"
+              }`}
             />
             {!formik.values.image && (
               <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
                 <FaUpload />
-                <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
+                <span className="text-gray-400 mt-2 text-[11px]">
+                  Otpremi Sliku
+                </span>
               </div>
             )}
             <input
               onChange={(e) => {
                 if (e.target.files[0]) {
-                  formik.setFieldValue('image', e.target.files[0])
+                  formik.setFieldValue("image", e.target.files[0]);
                 }
               }}
               type="file"
@@ -101,77 +127,204 @@ function DashboardSettingsInfo() {
             />
           </label>
 
-            <div>
-              <h3 className='text-[16px]'>Slika Predsednika</h3>
-              <span className='text-[10px] text-spanGray'>Profilna slika maksimalna veličina do 10MB</span><br />
-              <span className='text-red italic text-[13px]'>{showError('image')}</span>
-            </div>
-
+          <div>
+            <h3 className="text-[16px]">Slika Predsednika</h3>
+            <span className="text-[10px] text-spanGray">
+              Profilna slika maksimalna veličina do 10MB
+            </span>
+            <br />
+            <span className="text-red italic text-[13px]">
+              {showError("image")}
+            </span>
           </div>
+        </div>
 
-          <div className='flex flex-col items-center w-full'>
-            <div className='flex flex-col lg:flex-row items-center lg:items-start justify-between gap-5 w-[100%]'>
-              <div className='flex  flex-col gap-4 w-[50%]'>
-                <div className='flex flex-col items-center xl:items-start justify-between'>
-                  <label>Okrug {' '} <span className='text-red italic text-[13px]'>{showError('district')}</span></label>
-                  <input value={formik.values.district} onChange={formik.handleChange} type="text" name='district' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Ime Okruga...'/>
-                </div>
-
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Opština {' '} <span className='text-red italic text-[13px]'>{showError('municipality')}</span></label>
-                  <input value={formik.values.municipality} onChange={formik.handleChange} type="text" name='municipality' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Ime Opština...'/>
-                </div>
-
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Grad {' '} <span className='text-red italic text-[13px]'>{showError('city')}</span></label>
-                  <input value={formik.values.city} onChange={formik.handleChange} type="text" name='city' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Ime Grada...'/>
-                </div>
-
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Ime i Prezime Predsednika {' '} <span className='text-red italic text-[13px]'>{showError('fullNameOfThePresident')}</span></label>
-                  <input value={formik.values.fullNameOfThePresident} onChange={formik.handleChange} type="text" name='fullNameOfThePresident' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Ime i Prezime...'/>
-                </div>
-
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Datum Rođenja Predsednika {' '} <span className='text-red italic text-[13px]'>{showError('dateOfBirth')}</span></label>
-                  <input value={formik.values.dateOfBirth} onChange={formik.handleChange} type="text" name='dateOfBirth' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Datum Rođenja...'/>
-                </div>
+        <div className="flex flex-col items-center w-full">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-5 w-[100%]">
+            <div className="flex  flex-col gap-4 w-[50%]">
+              <div className="flex flex-col items-center xl:items-start justify-between">
+                <label>
+                  Okrug{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("district")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.district}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="district"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Ime Okruga..."
+                />
               </div>
 
-              <div className='flex flex-col gap-4 w-[50%]'>
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Email {' '} <span className='text-red italic text-[13px]'>{showError('email')}</span></label>
-                  <input value={formik.values.email} onChange={formik.handleChange} type="email" name='email' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Email...'/>
-                </div>
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Opština{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("municipality")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.municipality}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="municipality"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Ime Opština..."
+                />
+              </div>
 
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Telefon {' '} <span className='text-red italic text-[13px]'>{showError('phone')}</span></label>
-                  <input value={formik.values.phone} onChange={formik.handleChange} type="text" name='phone' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Telefon...'/>
-                </div>
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Grad{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("city")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.city}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="city"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Ime Grada..."
+                />
+              </div>
 
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Broj Gradskih/Opstinskih Funkcionera {' '} <span className='text-red italic text-[13px]'>{showError('numberOfOfficials')}</span></label>
-                  <input value={formik.values.numberOfOfficials} onChange={formik.handleChange} type="text" name='numberOfOfficials' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
-                </div>
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Ime i Prezime Predsednika{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("fullNameOfThePresident")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.fullNameOfThePresident}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="fullNameOfThePresident"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Ime i Prezime..."
+                />
+              </div>
 
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Web Sajt {' '} <span className='text-red italic text-[13px]'>{showError('website')}</span></label>
-                  <input value={formik.values.website} onChange={formik.handleChange} type="text" name='website' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
-                </div>
-
-                <div className='flex flex-col items-center xl:items-start  justify-between'>
-                  <label>Broj Predstavki Gradjana {' '} <span className='text-red italic text-[13px]'>{showError('numberOfApplications')}</span></label>
-                  <input value={formik.values.numberOfApplications} onChange={formik.handleChange} type="text" name='numberOfApplications' className='border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]' placeholder='Unesite Link...'/>
-                </div>
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Datum Rođenja Predsednika{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("dateOfBirth")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.dateOfBirth}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="dateOfBirth"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Datum Rođenja..."
+                />
               </div>
             </div>
 
-            <button className='mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]'>Dodaj Podatke</button>
+            <div className="flex flex-col gap-4 w-[50%]">
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Email{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("email")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  type="email"
+                  name="email"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Email..."
+                />
+              </div>
+
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Telefon{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("phone")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="phone"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Telefon..."
+                />
+              </div>
+
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Broj Gradskih/Opstinskih Funkcionera{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("numberOfOfficials")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.numberOfOfficials}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="numberOfOfficials"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Link..."
+                />
+              </div>
+
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Web Sajt{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("website")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.website}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="website"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Link..."
+                />
+              </div>
+
+              <div className="flex flex-col items-center xl:items-start  justify-between">
+                <label>
+                  Broj Predstavki Gradjana{" "}
+                  <span className="text-red italic text-[13px]">
+                    {showError("numberOfApplications")}
+                  </span>
+                </label>
+                <input
+                  value={formik.values.numberOfApplications}
+                  onChange={formik.handleChange}
+                  type="text"
+                  name="numberOfApplications"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
+                  placeholder="Unesite Link..."
+                />
+              </div>
+            </div>
           </div>
 
+          <button
+            type="submit"
+            className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
+            Dodaj Podatke
+          </button>
+        </div>
       </form>
     </div>
-  )
+  );
 }
 
 export default DashboardSettingsInfo;
