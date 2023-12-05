@@ -51,7 +51,7 @@ function App() {
           <BounceLoader color="#A3C8DB" className="spin" />
         </div>
       ) : (
-        <div className="flex flex-col bg-[#F0F5F7] h-[100vh]">
+        <div className="flex flex-col h-[100vh]">
           <Navigation />
           <Outlet />
         </div>
