@@ -3,7 +3,6 @@ import React, {useEffect, useState} from 'react'
 import {BounceLoader} from 'react-spinners'
 import DashboardSidebar from '../../components/DashboardComponents/DashboardSidebar/DashboardSidebar.jsx'
 import {Outlet} from 'react-router-dom'
-import {ToastContainer} from 'react-toastify'
 
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)

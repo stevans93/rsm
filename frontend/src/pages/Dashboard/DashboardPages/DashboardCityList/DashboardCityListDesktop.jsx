@@ -37,9 +37,8 @@ function DashboardCityListDesktop({municipalities}) {
             <table className="text-start shadowBorder w-[100%] text-[14px]">
               <thead>
                 <tr className="text-left bg-[#F0F5F7] p-[50px] border-b-2 border-main">
-                  <th className="px-6 py-6">Region</th>
-                  <th className="px-6 py-6">Opština</th>
-                  <th className="px-6 py-6">Grad</th>
+                  <th className="px-6 py-6">Okrug</th>
+                  <th className="px-6 py-6">Grad/Opština</th>
                   <th className="px-6 py-6">Predsednik</th>
                   <th className="px-6 py-6">Slika</th>
                   <th className="px-6 py-6">Akcija</th>
@@ -51,12 +50,11 @@ function DashboardCityListDesktop({municipalities}) {
                     <tr key={municipality._id} className="bg-[#fff] border-b-2 border-main p-[50px]">
                       <td className="px-6 py-3">{municipality.district}</td>
                       <td className="px-6 py-3">{municipality.municipality}</td>
-                      <td className="px-6 py-3">{municipality.city}</td>
                       <td className="px-6 py-3">{municipality.fullNameOfThePresident}</td>
                       <td className="px-6 py-3">
                         {municipality.image ? (
                           <img
-                            src={`${import.meta.env.VITE_IMAGE_URL}${municipality.image}`}
+                            src={`${municipality.image}`}
                             alt={municipality.fullNameOfThePresident}
                             className="w-[40px] h-[40px]"
                           />
@@ -74,7 +72,7 @@ function DashboardCityListDesktop({municipalities}) {
               <tfoot>
                 <tr className="align-middle">
                   <td className="px-6 py-6">Rows per page: {perPage}</td>
-                  <td className="px-6 py-6 text-center" colSpan="4">
+                  <td className="px-6 py-6 text-center" colSpan="2">
                     {municipalities.length === 0 ? `0 of 0` : `${currentPage} of ${totalPages}`}
                   </td>
                   <td className="flex it px-6 py-6 align-middle">

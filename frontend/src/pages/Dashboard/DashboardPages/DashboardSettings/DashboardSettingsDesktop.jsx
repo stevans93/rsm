@@ -64,7 +64,7 @@ function DashboardSettingsDesktop() {
                         <div className='flex items-center gap-5'>
                             <TbUserSquareRounded className='text-5xl text-main bg-[#fff] rounded-xl' />
                             <div className='flex flex-col'>
-                                <p className={`text-[24px] ${activeItem === 'profile' ? 'text-[#fff]' : 'text-main'}`}>Profil</p>
+                                <p className={`text-[24px] ${activeItem === 'profile' ? 'text-[#fff]' : 'text-main'}`}>Administrator</p>
                                 <span className={`text-[12px] ${activeItem === 'profile' ? 'text-[#fff]' : 'text-spanGray'}`}>Slika, Ime, Prezime, Email, Pozicija</span>
                             </div>
                         </div>
@@ -84,8 +84,8 @@ function DashboardSettingsDesktop() {
                         <div className='flex items-center gap-5'>
                             <PiUsersThree className='text-5xl text-main bg-[#fff] rounded-xl' />
                             <div>
-                                <p className={`text-[24px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`} >Korisnici</p>
-                                <span className={`text-[12px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-spanGray'}`} >Dodavanje Korisnika Platforme</span>
+                                <p className={`text-[24px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`} >Funkcioneri</p>
+                                <span className={`text-[12px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-spanGray'}`} >Dodavanje Funkcionera Platforme</span>
                             </div>
                         </div>
                         <MdArrowForward className={`text-3xl arrow ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`} />

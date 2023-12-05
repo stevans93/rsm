@@ -1,48 +1,86 @@
-import React from "react";
-import { FaPlus } from "react-icons/fa6";
-import { TfiExport } from "react-icons/tfi";
-import { IoSearch } from "react-icons/io5";
-import { useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { FaUpload } from "react-icons/fa";
+import * as Yup from 'yup'
 
-function SearchUser() {
-  const [open, setOpen] = useState(false);
+import {FaPlus} from 'react-icons/fa6'
+import {FaUpload} from 'react-icons/fa'
+import {IoSearch} from 'react-icons/io5'
+import React from 'react'
+import {TfiExport} from 'react-icons/tfi'
+import UserService from '../../services/userService'
+import {useFormik} from 'formik'
+import {useState} from 'react'
+
+function SearchUser({setPageSize, getData}) {
+  const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
+  let KB = 1024
+  let MB = KB * 1024
+
+  const [open, setOpen] = useState(false)
 
   const handleOpen = () => {
-    setOpen(!open);
-  };
+    setOpen(!open)
+  }
+
+  const handlePageSizeChange = (event) => {
+    const newSize = parseInt(event.target.value, 10)
+    setPageSize(newSize)
+  }
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      title: "",
-      phone: "",
-      // profileImage: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      title: '',
+      phone: '',
+      image: ''
     },
 
-    validate: {
-      firstName: Yup.string().required("Polje je obavezno..."),
-      lastName: Yup.string().required("Polje je obavezno..."),
-      email: Yup.string().required("Polje je obavezno..."),
-      title: Yup.string().required("Polje je obavezno..."),
-      phone: Yup.string().required("Polje je obavezno..."),
-      // profileImage: Yup.mixed()
-      //   .required('Polje je obavezno...')
-      //   .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
-      //   .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
-    },
+    validationSchema: Yup.object({
+      firstName: Yup.string().required('Polje je obavezno...'),
+      lastName: Yup.string().required('Polje je obavezno...'),
+      email: Yup.string().required('Polje je obavezno...'),
+      title: Yup.string().required('Polje je obavezno...'),
+      phone: Yup.string().required('Polje je obavezno...'),
+      image: Yup.mixed()
+        .required('Polje je obavezno...')
+        .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 10)
+        .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
+    }),
 
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+    onSubmit: async (values) => {
+      console.log(values)
+      const formData = new FormData()
 
-  const showError = (name) =>
-    formik.errors[name] && formik.touched[name] && formik.errors[name];
+      formData.append('file', values.image)
+      delete values.image
+
+      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]))
+
+      UserService.registerUser(formData)
+        .then((response) => {
+          console.log(response)
+
+          if (response.status === 200) {
+            console.log('Uspešna registracija korisnika..')
+          } else {
+            console.log('Registracija korisnika nije uspela...')
+          }
+          setOpen(false)
+          formik.resetForm()
+          getData()
+        })
+        .catch((error) => {
+          console.error('Greška prilikom registracije:', error.message)
+
+          if (error.response) {
+            console.error('Detalji greške:', error.response.data)
+          }
+          setOpen(false)
+        })
+    }
+  })
+
+  const showError = (name) => formik.errors[name] && formik.touched[name] && formik.errors[name]
 
   return (
     <div className="w-[100%] bg-[#fff] rounded-lg shadowBorder">
@@ -51,26 +89,23 @@ function SearchUser() {
           <h3>Lista Korisnika</h3>
           <button
             onClick={handleOpen}
-            className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]"
-          >
+            className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
             <FaPlus /> Dodaj Novog Korisnika
           </button>
 
           <span className="text-[13px]">Show</span>
-          <select className="border border-1 rounded-full text-center bg-[#fff] px-3 py-1">
-            <option>5</option>
-            <option>10</option>
-            <option>15</option>
+          <select
+            className="border border-1 rounded-full text-center bg-[#fff] px-3 py-1"
+            onChange={handlePageSizeChange}
+            defaultValue={10}>
+            <option value={5}>5</option>
+            <option value={10}>10</option>
           </select>
         </div>
 
         <div className="flex gap-3">
           <div className="relative flex">
-            <input
-              type="text"
-              className="border border-1 rounded-full px-2"
-              placeholder="Ime..."
-            />
+            <input type="text" className="border border-1 rounded-full px-2" placeholder="Ime..." />
             <IoSearch className="absolute top-[6px] right-3" />
           </div>
           <button className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
@@ -81,40 +116,28 @@ function SearchUser() {
 
       {open && (
         <>
-          <div
-            onClick={handleOpen}
-            className="bg-lightGray absolute top-0 w-screen h-screen opacity-70"
-          ></div>
+          <div onClick={handleOpen} className="bg-lightGray absolute top-0 w-screen h-screen opacity-70"></div>
           <form
             onSubmit={formik.handleSubmit}
-            className="flex flex-col absolute top-[20vh] left-[40vw] bg-white z-10 shadow-lg rounded-lg p-5"
-          >
+            className="flex flex-col absolute top-[20vh] left-[40vw] bg-white z-10 shadow-lg rounded-lg p-5">
             <div className="flex mb-[30px] gap-5">
               <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
                 <img
                   id="image-preview"
-                  src={
-                    formik.values.image
-                      ? URL.createObjectURL(formik.values.image)
-                      : ""
-                  }
+                  src={formik.values.image ? URL.createObjectURL(formik.values.image) : ''}
                   alt="Preview"
-                  className={`w-full h-full object-cover ${
-                    formik.values.image ? "" : "hidden"
-                  }`}
+                  className={`w-full h-full object-cover ${formik.values.image ? '' : 'hidden'}`}
                 />
                 {!formik.values.image && (
                   <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
                     <FaUpload />
-                    <span className="text-gray-400 mt-2 text-[11px]">
-                      Otpremi Sliku
-                    </span>
+                    <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
                   </div>
                 )}
                 <input
                   onChange={(e) => {
                     if (e.target.files[0]) {
-                      formik.setFieldValue("image", e.target.files[0]);
+                      formik.setFieldValue('image', e.target.files[0])
                     }
                   }}
                   type="file"
@@ -125,9 +148,7 @@ function SearchUser() {
 
               <div>
                 <h3 className="text-[16px]">Profilna Slika</h3>
-                <span className="text-[10px] text-spanGray">
-                  Profilna slika maksimalna veličina do 10MB
-                </span>
+                <span className="text-[10px] text-spanGray">Profilna slika maksimalna veličina do 10MB</span>
                 <br />
                 {/* <span className='text-red italic text-[13px]'>{showError('image')}</span> */}
               </div>
@@ -138,10 +159,7 @@ function SearchUser() {
                 <div className="flex  flex-col gap-4 w-[50%]">
                   <div className="flex flex-col items-center xl:items-start justify-between">
                     <label>
-                      Ime{" "}
-                      <span className="text-red italic text-[13px]">
-                        {showError("firstName")}
-                      </span>
+                      Ime <span className="text-red italic text-[13px]">{showError('firstName')}</span>
                     </label>
                     <input
                       value={formik.values.firstName}
@@ -155,10 +173,7 @@ function SearchUser() {
 
                   <div className="flex flex-col items-center xl:items-start  justify-between">
                     <label>
-                      Prezime{" "}
-                      <span className="text-red italic text-[13px]">
-                        {showError("lastName")}
-                      </span>
+                      Prezime <span className="text-red italic text-[13px]">{showError('lastName')}</span>
                     </label>
                     <input
                       value={formik.values.lastName}
@@ -172,10 +187,7 @@ function SearchUser() {
 
                   <div className="flex flex-col items-center xl:items-start  justify-between">
                     <label>
-                      Email{" "}
-                      <span className="text-red italic text-[13px]">
-                        {showError("email")}
-                      </span>
+                      Email <span className="text-red italic text-[13px]">{showError('email')}</span>
                     </label>
                     <input
                       value={formik.values.email}
@@ -191,10 +203,7 @@ function SearchUser() {
                 <div className="flex flex-col gap-4 w-[50%]">
                   <div className="flex flex-col items-center xl:items-start  justify-between">
                     <label>
-                      Pozicija{" "}
-                      <span className="text-red italic text-[13px]">
-                        {showError("title")}
-                      </span>
+                      Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
                     </label>
                     <input
                       value={formik.values.title}
@@ -208,10 +217,7 @@ function SearchUser() {
 
                   <div className="flex flex-col items-center xl:items-start  justify-between">
                     <label>
-                      Lozinka{" "}
-                      <span className="text-red italic text-[13px]">
-                        {showError("password")}
-                      </span>
+                      Lozinka <span className="text-red italic text-[13px]">{showError('password')}</span>
                     </label>
                     <input
                       value={formik.values.password}
@@ -225,10 +231,7 @@ function SearchUser() {
 
                   <div className="flex flex-col items-center xl:items-start  justify-between">
                     <label>
-                      Telefon{" "}
-                      <span className="text-red italic text-[13px]">
-                        {showError("phone")}
-                      </span>
+                      Telefon <span className="text-red italic text-[13px]">{showError('phone')}</span>
                     </label>
                     <input
                       value={formik.values.phone}
@@ -244,8 +247,7 @@ function SearchUser() {
 
               <button
                 type="submit"
-                className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]"
-              >
+                className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
                 Dodaj Korisnika
               </button>
             </div>
@@ -253,7 +255,7 @@ function SearchUser() {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default SearchUser;
+export default SearchUser

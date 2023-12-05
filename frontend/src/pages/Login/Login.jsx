@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import logo from '../../assets/Logo.png';
-import mapa from '../../assets/map icon.png';
+import logo from '../../assets/Logo-compress.png';
+import mapa from '../../assets/map icon-min.png';
 import { useDispatch } from 'react-redux';
 import { MdEmail } from "react-icons/md";
 import { IoIosLock } from "react-icons/io";
@@ -146,7 +146,7 @@ function Login() {
 
                             <button type="submit" className="py-2 rounded-full bg-primary text-[#fff] hover:bg-secondMain hover:border-secondMain">Prijavite se</button>
                             <div className="text-center">
-                                <Link><span>Zaboravili ste lozinku?</span></Link>
+                                {/* <Link><span>Zaboravili ste lozinku?</span></Link> */}
                             </div>
                         </form>
                     </div>
