@@ -7,6 +7,7 @@ import MapSideBar from '../../components/MapSideBar/MapSideBar'
 import MunicipalityService from '../../services/municipalityService'
 import {storeAllMunicipalities} from '../../store/municipalitySlice'
 import logo from '../../assets/Logo-compress.png'
+import InfoAboutTheCityMobile from '../../components/InfoAboutTheCity/InfoAboutTheCityMobile'
 
 function Map() {
   const [hoveredPath, setHoveredPath] = useState(null)
@@ -102,7 +103,7 @@ function Map() {
   }, [])
 
   return (
-    <div>
+    <div className='relative'>
         
       <div className="flex overflow-x-scroll lg:overflow-x-hidden relative w-full px-[20px] mt-[20px]">
         <div className="flex items-center md:pt-0 pt-[70px] justify-center md:w-[80%]">
@@ -140,27 +141,36 @@ function Map() {
 
         <div
           ref={sidebarRef}
-          className={`w-[70%] md:block fixed left-[15%] md:w-[20%] md:static top-[25%] ${!sidebar ? 'hidden' : ''}`}>
+          className={`w-[70%] md:block fixed left-[15%] md:w-[20%] md:static  ${!sidebar ? 'hidden' : ''}`}>
           <MapSideBar
             handleToggleInfo={handleToggleInfo}
             selectedTitle={selectedTitle}
             selectedMunicipality={selectedMunicipality}
           />
         </div>
-      </div>
 
-      {isInfoVisible && (
+        {isInfoVisible && (
         <div>
-          <div className="fixed inset-0 bg-secondary opacity-50 z-20"></div>
-          <div className={`absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-30`}>
-            <InfoAboutTheCity
-              handleToggleInfo={handleToggleInfo}
-              cityInfo={selectedMunicipalityInfo}
-              closeModal={closeModal}
-            />
-          </div>
+          {/* <div className="fixed inset-0 bg-secondary opacity-50 z-20"></div> */}
+            <div className={`absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-30 desktop`}>
+              <InfoAboutTheCity
+                handleToggleInfo={handleToggleInfo}
+                cityInfo={selectedMunicipalityInfo}
+                closeModal={closeModal}
+              />
+            </div>
+            <div className='absolute top-[10%] left-[5%] right-[5%] translate-y-[-10%] mx-auto mobile'>
+              <InfoAboutTheCityMobile
+                  handleToggleInfo={handleToggleInfo}
+                  cityInfo={selectedMunicipalityInfo}
+                  closeModal={closeModal}
+                />
+            </div>
         </div>
       )}
+      </div>
+
+      
 
       
     </div>

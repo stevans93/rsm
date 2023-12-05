@@ -1,11 +1,10 @@
 import {RxCross1} from 'react-icons/rx'
-import img from '../../assets/Dragan_Markovic_Palma.jpg'
 
 function InfoAboutTheCity({closeModal, cityInfo}) {
   return (
     <div className="bg-[#fff] w-[980px] h-[380px] rounded-2xl shadow p-[30px] relative mx-auto  ">
       <div className="flex flex-col h-[100%] justify-between">
-        <div className="flex">
+        <div className="flex ">
           <div className="flex flex-col gap-1">
             <h2 className="text-main text-[35px] font-bold">{cityInfo?.municipality}</h2>
             <p className="text-[12px] text-spanGray">Okrug: {cityInfo?.district}</p>
