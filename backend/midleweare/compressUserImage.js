@@ -21,10 +21,10 @@ const compressImages = async (req, res, next) => {
   }
   const file = req.file
   try {
-    console.log(`${MEDIA_LOCATION}/C${file.filename}`)
     const ext = path.extname(file.originalname);
     if (ext === '.jpeg' || ext === '.jpg' || ext === '.png') {
-      await sharp(file.buffer)
+      const fileBuffer = fs.readFileSync(file.path)
+      await sharp(fileBuffer)
         .toFormat('jpeg')  // Postavite format na JPEG da bi se oba formata obrađivala na isti način
         .jpeg({ quality: 80 })
         .toFile(`${MEDIA_LOCATION}/C${file.filename}`);

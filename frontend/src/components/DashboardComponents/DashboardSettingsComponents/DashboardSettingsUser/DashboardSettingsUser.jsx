@@ -9,7 +9,7 @@ import {useFormik} from 'formik'
 function DashboardSettingsUser() {
   const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
   let KB = 1024
-  let MB = KB * 1024;
+  let MB = KB * 1024
 
   const formik = useFormik({
     initialValues: {
@@ -36,12 +36,12 @@ function DashboardSettingsUser() {
     }),
 
     onSubmit: async (values) => {
-      const formData = new FormData();
+      const formData = new FormData()
 
-      formData.append('file', values.image);
-      delete values.image;
+      formData.append('file', values.image)
+      delete values.image
 
-      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]));
+      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]))
 
       UserService.registerUser(formData)
         .then((response) => {
@@ -67,8 +67,8 @@ function DashboardSettingsUser() {
 
   return (
     <div className="bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[500px] mx-auto dashboard">
-      <div className="w-[40%]">
-        <h2 className="text-[22px] text-main">Dodaj Korisnika</h2>
+      <div className="w-[50%]">
+        <h2 className="text-[22px] text-main">Dodaj Funkcionera</h2>
         <p className="text-[10px] text-spanGray">
           Podešavanja vaseg profila možete uraditi ovde ovo je vidljivo samo vama.
         </p>
@@ -102,8 +102,8 @@ function DashboardSettingsUser() {
           </label>
 
           <div>
-            <h3 className="text-[16px]">Profilna Slika</h3>
-            <span className="text-[10px] text-spanGray">Profilna slika maksimalna veličina do 10MB</span>
+            <h3 className="text-[16px]">Slika Funkcionera</h3>
+            <span className="text-[10px] text-spanGray">Slika Funkcionera maksimalna veličina do 10MB</span>
             <br />
             {/* <span className='text-red italic text-[13px]'>{showError('image')}</span> */}
           </div>
@@ -140,7 +140,7 @@ function DashboardSettingsUser() {
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col items-center xl:items-start justify-between">
                 <label>
                   Email <span className="text-red italic text-[13px]">{showError('email')}</span>
                 </label>
@@ -203,7 +203,7 @@ function DashboardSettingsUser() {
           <button
             type="submit"
             className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
-            Dodaj Korisnika
+            Dodaj Funkcionera
           </button>
         </div>
       </form>

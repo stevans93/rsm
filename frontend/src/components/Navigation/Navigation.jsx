@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {NavLink, useLocation, useNavigate} from "react-router-dom";
-import logo from '../../assets/Logo.png';
+import logo from '../../assets/Logo-compress.png';
 import { FaUserCircle } from "react-icons/fa";
 import { TfiMenu } from "react-icons/tfi";
 import { useDispatch, useSelector } from 'react-redux';

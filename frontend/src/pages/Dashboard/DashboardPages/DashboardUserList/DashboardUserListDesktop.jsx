@@ -1,50 +1,51 @@
-import React, { useEffect, useState } from "react";
-import SearchUser from "../../../../components/SearchUser/SearchUser";
-import UserService from "../../../../services/userService";
-import { useDispatch } from "react-redux";
-import { storeAllUsers } from "../../../../store/usersSlice";
-import { FaArrowLeft } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa";
+import React, {useEffect, useState} from 'react'
 
-function DashboardUserListDesktop({ users }) {
-  const dispatch = useDispatch();
+import {FaArrowLeft} from 'react-icons/fa'
+import {FaArrowRight} from 'react-icons/fa'
+import SearchUser from '../../../../components/SearchUser/SearchUser'
+import UserService from '../../../../services/userService'
+import {storeAllUsers} from '../../../../store/usersSlice'
+import {useDispatch} from 'react-redux'
 
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [totalPages, setTotalPages] = useState();
-  const [totalUsers, setTotalUsers] = useState();
+function DashboardUserListDesktop({users}) {
+  const dispatch = useDispatch()
+
+  const [pageNumber, setPageNumber] = useState(1)
+  const [pageSize, setPageSize] = useState(10)
+  const [totalPages, setTotalPages] = useState()
+  const [totalUsers, setTotalUsers] = useState()
 
   const fetchData = () => {
     UserService.getAllUsers(pageNumber, pageSize)
       .then((res) => {
-        dispatch(storeAllUsers(res.data.users));
-        setTotalPages(res.data.totalPages);
-        setTotalUsers(res.data.totalUsers);
+        dispatch(storeAllUsers(res.data.users))
+        setTotalPages(res.data.totalPages)
+        setTotalUsers(res.data.totalUsers)
       })
       .catch((err) => {
-        console.log(err);
-      });
-  };
+        console.log(err)
+      })
+  }
 
   useEffect(() => {
-    fetchData();
-  }, [pageNumber, pageSize]);
+    fetchData()
+  }, [pageNumber, pageSize])
 
   const handlePageChange = (newPageNumber) => {
-    setPageNumber(newPageNumber);
-  };
+    setPageNumber(newPageNumber)
+  }
 
   const handlePrevPage = () => {
     if (pageNumber > 1) {
-      handlePageChange(pageNumber - 1);
+      handlePageChange(pageNumber - 1)
     }
-  };
+  }
 
   const handleNextPage = () => {
     if (pageNumber < totalPages) {
-      handlePageChange(pageNumber + 1);
+      handlePageChange(pageNumber + 1)
     }
-  };
+  }
 
   return (
     <div className="desktop">
@@ -53,34 +54,20 @@ function DashboardUserListDesktop({ users }) {
           <h2 className="text-[40px] font-bold mb-[50px]">Lista Korisnika</h2>
         </div>
         <div>
-          <SearchUser setPageSize={setPageSize} />
+          <SearchUser setPageSize={setPageSize} getData={fetchData} />
         </div>
         <div>
           <div className="mt-[30px] w-[100%] rounded-xl !bg-[#fff] p-2 shadowBorder">
             <table className=" text-start w-[100%] text-[14px]">
               <thead>
                 <tr className="text-left p-[50px]">
-                  <th className="px-6 py-3 border-r border-b border-[#00000029]">
-                    SI
-                  </th>
-                  <th className="px-6 py-3 border-r border-b border-[#00000029]">
-                    Ime
-                  </th>
-                  <th className="px-6 py-3 border-r border-b border-[#00000029]">
-                    Prezime
-                  </th>
-                  <th className="px-6 py-3 border-r border-b border-[#00000029]">
-                    Email
-                  </th>
-                  <th className="px-6 py-3 border-r border-b border-[#00000029]">
-                    Broj Telefona
-                  </th>
-                  <th className="px-6 py-3 border-r border-b border-[#00000029]">
-                    Pozicija
-                  </th>
-                  <th className="px-6 py-3 border-b border-[#00000029]">
-                    Akcija
-                  </th>
+                  <th className="px-6 py-3 border-r border-b border-[#00000029]">SI</th>
+                  <th className="px-6 py-3 border-r border-b border-[#00000029]">Ime</th>
+                  <th className="px-6 py-3 border-r border-b border-[#00000029]">Prezime</th>
+                  <th className="px-6 py-3 border-r border-b border-[#00000029]">Email</th>
+                  <th className="px-6 py-3 border-r border-b border-[#00000029]">Broj Telefona</th>
+                  <th className="px-6 py-3 border-r border-b border-[#00000029]">Pozicija</th>
+                  <th className="px-6 py-3 border-b border-[#00000029]">Akcija</th>
                 </tr>
               </thead>
               <tbody>
@@ -90,26 +77,14 @@ function DashboardUserListDesktop({ users }) {
                       <td className="px-6 py-3 border-r border-b border-[#00000029]">
                         {(pageNumber - 1) * pageSize + (i + 1)}
                       </td>
-                      <td className="px-6 py-3 border-r border-b border-[#00000029]">
-                        {user.firstName}
-                      </td>
-                      <td className="px-6 py-3 border-r border-b border-[#00000029]">
-                        {user.lastName}
-                      </td>
-                      <td className="px-6 py-3 border-r border-b border-[#00000029]">
-                        {user.email}
-                      </td>
-                      <td className="px-6 py-3 border-r border-b border-[#00000029]">
-                        {user.phone}
-                      </td>
-                      <td className="px-6 py-3 border-r border-b border-[#00000029]">
-                        {user.title}
-                      </td>
-                      <td className="px-6 py-3 border-b border-[#00000029]">
-                        Akcija
-                      </td>
+                      <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.firstName}</td>
+                      <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.lastName}</td>
+                      <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.email}</td>
+                      <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.phone}</td>
+                      <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.title}</td>
+                      <td className="px-6 py-3 border-b border-[#00000029]">Akcija</td>
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
             </table>
@@ -137,7 +112,7 @@ function DashboardUserListDesktop({ users }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default DashboardUserListDesktop;
+export default DashboardUserListDesktop
