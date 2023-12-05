@@ -84,7 +84,7 @@ function DashboardCityBelgradeDesktop({municipalities2}) {
                     <IoIosArrowForward
                       className="text-[22px]"
                       onClick={() => {
-                        if (currentPage === totalPages) return
+                        if (currentPage === totalPages || totalPages === 0) return
                         setCurrentPage((prev) => Math.max(prev + 1, totalPages))
                       }}
                     />

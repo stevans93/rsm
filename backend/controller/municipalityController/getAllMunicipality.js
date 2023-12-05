@@ -23,6 +23,7 @@ const getAllMunicipality = async (req, res) => {
             municipalities,
             currentPage: page,
             totalPages,
+            totalMunicipalities: totalCount
         });
     } catch (err) {
         console.log(err);

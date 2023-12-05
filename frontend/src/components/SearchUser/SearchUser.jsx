@@ -90,25 +90,29 @@ function SearchUser({setPageSize, getData}) {
 
   return (
     <div className="w-[100%] bg-[#fff] rounded-lg shadowBorder">
-      <div className="flex items-center justify-between text-[13px] p-4">
-        <div className="flex items-center gap-3">
-          <h3>Lista Funkcionera</h3>
-          <button
-            onClick={handleOpen}
-            className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
-            <FaPlus /> Dodaj Novog Funkcionera
-          </button>
+      <div className="w-full items-center md:justify-between flex flex-col gap-3 md:flex-row text-[13px] p-4">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-3">
+            <h3>Lista Funkcionera</h3>
 
-          <span className="text-[13px]">Show</span>
-          <select
-            className="border border-1 rounded-full text-center bg-[#fff] px-3 py-1"
-            onChange={handlePageSizeChange}
-            defaultValue={12}>
-            <option value={5}>5</option>
-            <option value={12}>12</option>
-          </select>
+            <button
+              onClick={handleOpen}
+              className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
+              <FaPlus /> Dodaj Novog Funkcionera
+            </button>
+            <div className="flex flex-row items-center gap-2 ">
+              <span className="text-[13px]">Show</span>
+
+              <select
+                className="border border-1 rounded-full text-center bg-[#fff] px-3 py-1"
+                onChange={handlePageSizeChange}
+                defaultValue={12}>
+                <option value={5}>5</option>
+                <option value={12}>12</option>
+              </select>
+            </div>
+          </div>
         </div>
-
         <div className="flex gap-3">
           <div className="relative flex">
             <input
@@ -127,10 +131,10 @@ function SearchUser({setPageSize, getData}) {
 
       {open && (
         <>
-          <div onClick={handleOpen} className="bg-lightGray absolute top-0 w-screen h-screen opacity-70"></div>
+          <div onClick={handleOpen} className="bg-lightGray absolute top-0 w-full h-full opacity-70"></div>
           <form
             onSubmit={formik.handleSubmit}
-            className="flex flex-col absolute top-[20vh] left-[40vw] bg-white z-10 shadow-lg rounded-lg p-5">
+            className="flex flex-col absolute top-[10%] left-[10%] right-[10%] md:left-[40vw]  bg-white z-10 shadow-lg rounded-lg p-5">
             <div className="flex mb-[30px] gap-5">
               <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
                 <img
@@ -216,14 +220,18 @@ function SearchUser({setPageSize, getData}) {
                     <label>
                       Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
                     </label>
-                    <input
+                    <select
                       value={formik.values.title}
                       onChange={formik.handleChange}
-                      type="text"
                       name="title"
-                      className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]"
-                      placeholder="Unesite Poziciju..."
-                    />
+                      className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]">
+                      <option value="" disabled>
+                        Select Poziciju...
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="funkcioner">Funkcioner</option>
+                      {/* Add more options as needed */}
+                    </select>
                   </div>
 
                   <div className="flex flex-col items-center xl:items-start  justify-between">

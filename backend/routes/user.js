@@ -10,4 +10,6 @@ router.put('/changePassword', verifyToken, require('../controller/userController
 
 router.post('/upload-image', upload.single('file'), require('../controller/userController/uploadImage'));
 
+router.delete('/:id', require('../controller/userController/deleteUser'));
+
 module.exports = router;
