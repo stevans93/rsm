@@ -4,11 +4,14 @@ const getAllMunicipality = async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 2;
+        const district = req.query.district || null;
 
-        const totalCount = await MunicipalityModel.countDocuments({});
+        const districtSearch = district ? { district: district } : null
+
+        const totalCount = await MunicipalityModel.countDocuments({ ...districtSearch });
         const totalPages = Math.ceil(totalCount / limit);
 
-        const municipalities = await MunicipalityModel.find({})
+        const municipalities = await MunicipalityModel.find({ ...districtSearch })
             .skip((page - 1) * limit)
             .limit(limit);
 

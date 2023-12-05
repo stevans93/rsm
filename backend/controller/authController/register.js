@@ -23,7 +23,7 @@ const register = async (req, res) => {
                 console.error(error);
             }
 
-            let newUser = new UserModel({ ...reqBody, password: hash });
+            let newUser = new UserModel({ ...reqBody, profileImage: file.filename, password: hash });
 
             newUser.save()
                 .then((user) => {

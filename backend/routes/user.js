@@ -4,6 +4,10 @@ const upload = require('../midleweare/upload');
 const router = new Router();
 
 router.get('/all', require('../controller/userController/getAllUsers'));
+
+router.put('/changePassword', verifyToken, require('../controller/userController/changePassword.js'))
+
+
 router.post('/upload-image', upload.single('file'), require('../controller/userController/uploadImage'));
 
 module.exports = router;
