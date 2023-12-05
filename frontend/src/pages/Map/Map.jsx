@@ -144,12 +144,15 @@ function Map() {
       </div>
 
       {isInfoVisible && (
-        <div className={`absolute top-[60%] left-[50%] translate-y-[-50%] translate-x-[-50%] `}>
-          <InfoAboutTheCity
-            handleToggleInfo={handleToggleInfo}
-            cityInfo={selectedMunicipalityInfo}
-            closeModal={closeModal}
-          />
+        <div>
+          <div className="fixed inset-0 bg-secondary opacity-50 z-20"></div>
+          <div className={`absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] z-30`}>
+            <InfoAboutTheCity
+              handleToggleInfo={handleToggleInfo}
+              cityInfo={selectedMunicipalityInfo}
+              closeModal={closeModal}
+            />
+          </div>
         </div>
       )}
     </div>
