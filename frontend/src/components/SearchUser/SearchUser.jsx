@@ -220,14 +220,18 @@ function SearchUser({setPageSize, getData}) {
                     <label>
                       Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
                     </label>
-                    <input
+                    <select
                       value={formik.values.title}
                       onChange={formik.handleChange}
-                      type="text"
                       name="title"
-                      className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]"
-                      placeholder="Unesite Poziciju..."
-                    />
+                      className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]">
+                      <option value="" disabled>
+                        Select Poziciju...
+                      </option>
+                      <option value="admin">Admin</option>
+                      <option value="funkcioner">Funkcioner</option>
+                      {/* Add more options as needed */}
+                    </select>
                   </div>
 
                   <div className="flex flex-col items-center xl:items-start  justify-between">

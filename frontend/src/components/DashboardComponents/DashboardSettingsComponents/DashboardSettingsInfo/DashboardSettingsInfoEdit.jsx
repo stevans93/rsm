@@ -134,8 +134,8 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
 
         <div className="flex flex-col items-center w-full">
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-5 w-[100%]">
-            <div className="flex  flex-col gap-3 w-[40%]">
-              <div className="flex flex-col items-center xl:items-start justify-between">
+            <div className="flex  flex-col gap-3 w-full  lg:w-[40%]">
+              <div className="flex flex-col gap-1 items-start justify-between">
                 <label>
                   Okrug <span className="text-red italic text-[13px]">{showError('district')}</span>
                 </label>
@@ -144,12 +144,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="district"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2 w-full"
                   placeholder="Unesite Ime Okruga..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col w-full gap-1 items-start  justify-between">
                 <label>
                   Grad/Opština <span className="text-red italic text-[13px]">{showError('municipality')}</span>
                 </label>
@@ -158,12 +158,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="municipality"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2   w-full"
                   placeholder="Unesite Ime Opština..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start  justify-between">
                 <label>
                   Email <span className="text-red italic text-[13px]">{showError('email')}</span>
                 </label>
@@ -172,12 +172,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="email"
                   name="email"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Email..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start   justify-between">
                 <label>
                   Telefon <span className="text-red italic text-[13px]">{showError('phone')}</span>
                 </label>
@@ -186,12 +186,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="phone"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Telefon..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start   justify-between">
                 <label>
                   Web Sajt <span className="text-red italic text-[13px]">{showError('website')}</span>
                 </label>
@@ -200,12 +200,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="website"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Link..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start   justify-between">
                 <label>
                   Datum Rođenja Predsednika{' '}
                   <span className="text-red italic text-[13px]">{showError('dateOfBirth')}</span>
@@ -215,14 +215,14 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="dateOfBirth"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Datum Rođenja..."
                 />
               </div>
             </div>
 
-            <div className="flex flex-col gap-3 w-[60%]">
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+            <div className="flex flex-col gap-3 w-full  lg:w-[60%]">
+              <div className="flex flex-col gap-1 items-start  w-full  justify-between">
                 <label>
                   Ime i Prezime Predsednika{' '}
                   <span className="text-red italic text-[13px]">{showError('fullNameOfThePresident')}</span>
@@ -232,12 +232,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="fullNameOfThePresident"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Ime i Prezime..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start   justify-between">
                 <label>
                   Broj Predstavki Gradjana{' '}
                   <span className="text-red italic text-[13px]">{showError('numberOfApplications')}</span>
@@ -247,12 +247,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="numberOfApplications"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Link..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start   justify-between">
                 <label>
                   Ukupan Broj Predstavki Gradjana{' '}
                   <span className="text-red italic text-[13px]">{showError('fullNumberOfApplications')}</span>
@@ -262,12 +262,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="fullNumberOfApplications"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Ukupan Broj..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start   justify-between">
                 <label>
                   Broj Gradskih/Opstinskih Funkcionera{' '}
                   <span className="text-red italic text-[13px]">{showError('numberOfOfficials')}</span>
@@ -277,12 +277,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="numberOfOfficials"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Link..."
                 />
               </div>
 
-              <div className="flex flex-col items-center xl:items-start  justify-between">
+              <div className="flex flex-col gap-1 items-start  justify-between">
                 <label>
                   Ukupan Broj Gradskih/Opstinskih Funkcionera{' '}
                   <span className="text-red italic text-[13px]">{showError('fullNumberOfOfficials')}</span>
@@ -292,7 +292,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                   onChange={formik.handleChange}
                   type="text"
                   name="fullNumberOfOfficials"
-                  className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
+                  className="border border-1 border-main rounded-xl px-4 py-2  w-full"
                   placeholder="Unesite Ukupan Broj..."
                 />
               </div>

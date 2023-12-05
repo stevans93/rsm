@@ -16,6 +16,8 @@ class UserService {
     };
 
     static changePassword = (body) => axios.put('/user/changePassword', body)
+
+    static deleteUser = (id) => axios.delete(`/user/${id}`)
 }
 
 export default UserService;

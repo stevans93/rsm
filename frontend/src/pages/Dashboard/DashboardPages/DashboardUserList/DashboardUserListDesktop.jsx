@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 
 import {FaArrowLeft} from 'react-icons/fa'
 import {FaArrowRight} from 'react-icons/fa'
+import {MdDeleteOutline} from 'react-icons/md'
 import SearchUser from '../../../../components/SearchUser/SearchUser'
 import UserService from '../../../../services/userService'
 import {storeAllUsers} from '../../../../store/usersSlice'
@@ -46,6 +47,14 @@ function DashboardUserListDesktop({users}) {
       handlePageChange(pageNumber + 1)
     }
   }
+  const deleteUser = async (id) => {
+    try {
+      await UserService.deleteUser(id)
+      fetchData()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="desktop">
@@ -82,7 +91,18 @@ function DashboardUserListDesktop({users}) {
                       <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.email}</td>
                       <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.phone}</td>
                       <td className="px-6 py-3 border-r border-b border-[#00000029]">{user.title}</td>
-                      <td className="px-6 py-3 border-b border-[#00000029]">Akcija</td>
+                      <td className="px-6 py-3 border-b border-[#00000029]">
+                        <button
+                          className="align-middle text-center ml-5"
+                          type="button"
+                          onClick={() => {
+                            deleteUser(user._id)
+                            // setMunicipalityId(municipality._id)
+                            // setShowEditModal(true)
+                          }}>
+                          <MdDeleteOutline size={20} />
+                        </button>
+                      </td>
                     </tr>
                   )
                 })}

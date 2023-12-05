@@ -24,7 +24,6 @@ function DashboardCityListDesktop({municipalities}) {
   useEffect(() => {
     MunicipalityService.allMunicipalities(currentPage, perPage, '', search, 'Grad Beograd')
       .then((res) => {
-        console.log(res.data)
         dispatch(storeAllMunicipalities(res.data))
       })
       .catch((err) => {
@@ -114,7 +113,7 @@ function DashboardCityListDesktop({municipalities}) {
                     <IoIosArrowForward
                       className="text-[22px]"
                       onClick={() => {
-                        if (currentPage === totalPages) return
+                        if (currentPage === totalPages || totalPages === 0) return
                         setCurrentPage((prev) => prev + 1)
                       }}
                     />
