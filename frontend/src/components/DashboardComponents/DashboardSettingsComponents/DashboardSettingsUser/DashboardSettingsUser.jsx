@@ -9,7 +9,7 @@ import {useFormik} from 'formik'
 function DashboardSettingsUser() {
   const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
   let KB = 1024
-  let MB = KB * 1024;
+  let MB = KB * 1024
 
   const formik = useFormik({
     initialValues: {
@@ -36,12 +36,12 @@ function DashboardSettingsUser() {
     }),
 
     onSubmit: async (values) => {
-      const formData = new FormData();
+      const formData = new FormData()
 
-      formData.append('file', values.image);
-      delete values.image;
+      formData.append('file', values.image)
+      delete values.image
 
-      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]));
+      Object.entries(values).forEach((obj) => formData.append(obj[0], obj[1]))
 
       UserService.registerUser(formData)
         .then((response) => {

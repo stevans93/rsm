@@ -16,7 +16,7 @@ axios.interceptors.request.use((config) => {
   if (localStorage.hasOwnProperty('rsm_token')) {
     config.headers.Authorization = localStorage.getItem('rsm_token')
   }
-  
+
   return config
 })
 
