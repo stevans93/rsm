@@ -11,7 +11,7 @@ function DashboardUserListDesktop({users}) {
   const dispatch = useDispatch()
 
   const [pageNumber, setPageNumber] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  const [pageSize, setPageSize] = useState(12)
   const [totalPages, setTotalPages] = useState()
   const [totalUsers, setTotalUsers] = useState()
 

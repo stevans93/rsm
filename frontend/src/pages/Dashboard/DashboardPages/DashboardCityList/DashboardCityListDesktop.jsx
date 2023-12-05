@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react'
 
 import {BsThreeDotsVertical} from 'react-icons/bs'
 import DashboardSettingsInfoEdit from '../../../../components/DashboardComponents/DashboardSettingsComponents/DashboardSettingsInfo/DashboardSettingsInfoEdit'
+import {MdDeleteOutline} from 'react-icons/md'
 import MunicipalityService from '../../../../services/municipalityService'
 import SearchCity from '../../../../components/SearchCity/SearchCity'
 import {storeAllMunicipalities} from '../../../../store/municipalitySlice'
@@ -17,30 +18,39 @@ function DashboardCityListDesktop({municipalities}) {
   const [showEditModal, setShowEditModal] = useState(false)
   const [municipalityId, setMunicipalityId] = useState('')
   const [reLoad, setReLoad] = useState(false)
-  const perPage = 12
+  const [search, setSearch] = useState('')
+  const perPage = 10
 
   useEffect(() => {
-    MunicipalityService.allMunicipalities(currentPage, perPage)
+    MunicipalityService.allMunicipalities(currentPage, perPage, '', search)
       .then((res) => {
+        console.log(res.data)
         dispatch(storeAllMunicipalities(res.data))
       })
       .catch((err) => {
         console.log(err)
       })
-  }, [dispatch, currentPage, perPage, reLoad])
-
+  }, [dispatch, currentPage, perPage, reLoad, search])
+  const deleteMunicipality = async (id) => {
+    try {
+      await MunicipalityService.deleteMunicipalities(id)
+      setReLoad((prev) => !prev)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="desktop relative">
       <div className="table-responsive">
         <div className="flex justify-between items-center mb-[50px]">
-          <h2 className="text-[40px] font-bold">Lista Opština</h2>
-          <SearchCity />
+          <h2 className="text-[40px] font-bold">Lista Gradova/Opština</h2>
+          <SearchCity setSearch={setSearch} />
         </div>
         <div>
           <div>
-            <table className="text-start shadowBorder w-[100%] text-[14px]">
+            <table className="text-start shadowBorder w-full table-auto text-[14px]">
               <thead>
-                <tr className="text-left bg-[#F0F5F7] p-[50px] border-b-2 border-main">
+                <tr className="text-left  bg-[#F0F5F7] p-[50px] border-b-2 border-main">
                   <th className="px-6 py-6">Okrug</th>
                   <th className="px-6 py-6">Grad/Opština</th>
                   <th className="px-6 py-6">Predsednik</th>
@@ -51,10 +61,9 @@ function DashboardCityListDesktop({municipalities}) {
               <tbody>
                 {municipalities.map((municipality) => {
                   return (
-                    <tr key={municipality._id} className="bg-[#fff] border-b-2 border-main p-[50px]">
+                    <tr key={municipality._id} className="bg-[#fff]  border-b-2 border-main p-[50px]">
                       <td className="px-6 py-3">{municipality.district}</td>
                       <td className="px-6 py-3">{municipality.municipality}</td>
-                      <td className="px-6 py-3">{municipality.city}</td>
                       <td className="px-6 py-3">{municipality.fullNameOfThePresident}</td>
                       <td className="px-6 py-3">
                         {municipality.image ? (
@@ -67,7 +76,7 @@ function DashboardCityListDesktop({municipalities}) {
                           <FaRegUserCircle size={32} />
                         )}
                       </td>
-                      <td className="text-main text-lg px-6 py-3">
+                      <td className="text-main text-lg flex gap-3 px-6 py-3">
                         {/* here goes edit */}
                         <button
                           type="button"
@@ -77,6 +86,15 @@ function DashboardCityListDesktop({municipalities}) {
                           }}>
                           <FaRegEdit />
                         </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            deleteMunicipality(municipality._id)
+                            // setMunicipalityId(municipality._id)
+                            // setShowEditModal(true)
+                          }}>
+                          <MdDeleteOutline />
+                        </button>
                       </td>
                     </tr>
                   )
@@ -85,10 +103,10 @@ function DashboardCityListDesktop({municipalities}) {
               <tfoot>
                 <tr className="align-middle">
                   <td className="px-6 py-6">Rows per page: {perPage}</td>
-                  <td className="px-6 py-6 text-center" colSpan="4">
+                  <td className="px-6 py-6 text-center" colSpan="3">
                     {municipalities.length === 0 ? `0 of 0` : `${currentPage} of ${totalPages}`}
                   </td>
-                  <td className="flex it px-6 py-6 align-middle">
+                  <td className="flex px-6 py-6 align-middle">
                     <IoIosArrowBack
                       className="text-[22px]"
                       onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

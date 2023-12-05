@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class MunicipalityService {
-    static allMunicipalities = (page, limit, district = '') => axios.get(`/municipality/all?page=${page}&limit=${limit}&district=${district}`);
+    static allMunicipalities = (page, limit, district = '', search = '') => axios.get(`/municipality/all?page=${page}&limit=${limit}&district=${district}&search=${search}`);
 
     static getSingleMunicipalities = (id) =>
         axios.get(`/municipality/single-manicipality/${id}`);
@@ -12,6 +12,8 @@ class MunicipalityService {
         });
     static editMunicipality = (id, body) =>
         axios.post(`/municipality/single-manicipality-edit/${id}`, body);
+
+    static deleteMunicipalities = (id) => axios.delete(`/municipality/${id}`);
 
 }
 

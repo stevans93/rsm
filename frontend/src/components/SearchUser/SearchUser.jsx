@@ -103,9 +103,9 @@ function SearchUser({setPageSize, getData}) {
           <select
             className="border border-1 rounded-full text-center bg-[#fff] px-3 py-1"
             onChange={handlePageSizeChange}
-            defaultValue={10}>
+            defaultValue={12}>
             <option value={5}>5</option>
-            <option value={10}>10</option>
+            <option value={12}>12</option>
           </select>
         </div>
 

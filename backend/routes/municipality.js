@@ -23,5 +23,9 @@ router.post(
   compressImages,
   require("../controller/municipalityController/addMunicipality")
 );
+router.delete(
+  "/:id",
+  require("../controller/municipalityController/deleteMunicipality")
+);
 
 module.exports = router;
