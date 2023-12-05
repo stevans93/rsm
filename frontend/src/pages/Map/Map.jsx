@@ -62,9 +62,8 @@ function Map() {
     setHoveredPath(null)
   }
 
-  const handleToggleInfo = (selectedMunicipality) => {
-    const clickedMunicipality =
-      municipalities?.find((municipality) => municipality.municipality === selectedMunicipality) ?? null
+  const handleToggleInfo = (_id) => {
+    const clickedMunicipality = municipalities?.find((municipality) => municipality._id === _id) ?? null
 
     setSelectedMunicipalityInfo(clickedMunicipality)
     setIsInfoVisible(true)
