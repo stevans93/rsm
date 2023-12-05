@@ -1,8 +1,9 @@
+import {FaRegEdit, FaRegUserCircle} from 'react-icons/fa'
 import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 import React, {useEffect, useState} from 'react'
 
 import {BsThreeDotsVertical} from 'react-icons/bs'
-import {FaRegUserCircle} from 'react-icons/fa'
+import DashboardSettingsInfoEdit from '../../../../components/DashboardComponents/DashboardSettingsComponents/DashboardSettingsInfo/DashboardSettingsInfoEdit'
 import MunicipalityService from '../../../../services/municipalityService'
 import SearchCity from '../../../../components/SearchCity/SearchCity'
 import {storeAllMunicipalities} from '../../../../store/municipalitySlice'
@@ -13,6 +14,9 @@ function DashboardCityListDesktop({municipalities}) {
   const dispatch = useDispatch()
   const {totalPages} = useSelector((state) => state.municipalityStore)
   const [currentPage, setCurrentPage] = useState(1)
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [municipalityId, setMunicipalityId] = useState('')
+  const [reLoad, setReLoad] = useState(false)
   const perPage = 3
 
   useEffect(() => {
@@ -23,10 +27,10 @@ function DashboardCityListDesktop({municipalities}) {
       .catch((err) => {
         console.log(err)
       })
-  }, [dispatch, currentPage, perPage])
+  }, [dispatch, currentPage, perPage, reLoad])
 
   return (
-    <div className="desktop">
+    <div className="desktop relative">
       <div className="table-responsive">
         <div className="flex justify-between items-center mb-[50px]">
           <h2 className="text-[40px] font-bold">Lista Opština</h2>
@@ -50,6 +54,7 @@ function DashboardCityListDesktop({municipalities}) {
                     <tr key={municipality._id} className="bg-[#fff] border-b-2 border-main p-[50px]">
                       <td className="px-6 py-3">{municipality.district}</td>
                       <td className="px-6 py-3">{municipality.municipality}</td>
+                      <td className="px-6 py-3">{municipality.city}</td>
                       <td className="px-6 py-3">{municipality.fullNameOfThePresident}</td>
                       <td className="px-6 py-3">
                         {municipality.image ? (
@@ -62,8 +67,16 @@ function DashboardCityListDesktop({municipalities}) {
                           <FaRegUserCircle size={32} />
                         )}
                       </td>
-                      <td className="text-main px-6 py-3">
-                        <BsThreeDotsVertical />
+                      <td className="text-main text-lg px-6 py-3">
+                        {/* here goes edit */}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMunicipalityId(municipality._id)
+                            setShowEditModal(true)
+                          }}>
+                          <FaRegEdit />
+                        </button>
                       </td>
                     </tr>
                   )
@@ -72,7 +85,7 @@ function DashboardCityListDesktop({municipalities}) {
               <tfoot>
                 <tr className="align-middle">
                   <td className="px-6 py-6">Rows per page: {perPage}</td>
-                  <td className="px-6 py-6 text-center" colSpan="2">
+                  <td className="px-6 py-6 text-center" colSpan="4">
                     {municipalities.length === 0 ? `0 of 0` : `${currentPage} of ${totalPages}`}
                   </td>
                   <td className="flex it px-6 py-6 align-middle">
@@ -88,6 +101,17 @@ function DashboardCityListDesktop({municipalities}) {
           </div>
         </div>
       </div>
+      {showEditModal ? (
+        <div className="mx-auto absolute top-0 right-[50%] translate-x-[50%]">
+          <DashboardSettingsInfoEdit
+            showCloseBtn={true}
+            showEditModal={showEditModal}
+            setShowEditModal={setShowEditModal}
+            municipalityId={municipalityId}
+            setReLoad={setReLoad}
+          />
+        </div>
+      ) : null}
     </div>
   )
 }

@@ -3,10 +3,11 @@ import * as Yup from 'yup'
 import React, {useState} from 'react'
 
 import {FaUpload} from 'react-icons/fa'
+import {IoMdCloseCircleOutline} from 'react-icons/io'
 import MunicipalityService from '../../../../services/municipalityService'
 import {useFormik} from 'formik'
 
-function DashboardSettingsInfo() {
+function DashboardSettingsInfo({showCloseBtn, setShowEditModal}) {
   const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
   let KB = 1024
   let MB = KB * 1024
@@ -64,6 +65,13 @@ function DashboardSettingsInfo() {
 
   return (
     <div className="bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[650px] mx-auto dashboard">
+      {showCloseBtn ? (
+        <div className="w-full flex justify-end items-center">
+          <button type="button" onClick={() => setShowEditModal(false)}>
+            <IoMdCloseCircleOutline className="text-[1.5rem] text-main" />
+          </button>
+        </div>
+      ) : null}
       <div className="w-[40%]">
         <h2 className="text-[22px] text-main">Dodaj Podatke</h2>
         <p className="text-[10px] text-spanGray">
@@ -97,13 +105,12 @@ function DashboardSettingsInfo() {
               className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
             />
           </label>
-
-          <div>
-            <h3 className="text-[16px]">Slika Predsednika</h3>
-            <span className="text-[10px] text-spanGray">Profilna slika maksimalna veličina do 10MB</span>
-            <br />
-            <span className="text-red italic text-[13px]">{showError('image')}</span>
-          </div>
+        </div>
+        <div>
+          <h3 className="text-[16px]">Slika Predsednika</h3>
+          <span className="text-[10px] text-spanGray">Profilna slika maksimalna veličina do 10MB</span>
+          <br />
+          <span className="text-red italic text-[13px]">{showError('image')}</span>
         </div>
 
         <div className="flex flex-col items-center w-full">
