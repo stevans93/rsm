@@ -22,7 +22,7 @@ function DashboardCityListDesktop({municipalities}) {
   const perPage = 10
 
   useEffect(() => {
-    MunicipalityService.allMunicipalities(currentPage, perPage, '', search)
+    MunicipalityService.allMunicipalities(currentPage, perPage, '', search, 'Grad Beograd')
       .then((res) => {
         console.log(res.data)
         dispatch(storeAllMunicipalities(res.data))

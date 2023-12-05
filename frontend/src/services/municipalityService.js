@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class MunicipalityService {
-    static allMunicipalities = (page, limit, district = '', search = '') => axios.get(`/municipality/all?page=${page}&limit=${limit}&district=${district}&search=${search}`);
+    static allMunicipalities = (page, limit, district = '', search = '', removeDistrict = '') => axios.get(`/municipality/all?page=${page}&limit=${limit}&district=${district}&search=${search}&removeDistrict=${removeDistrict}`);
 
     static getSingleMunicipalities = (id) =>
         axios.get(`/municipality/single-manicipality/${id}`);
@@ -11,7 +11,9 @@ class MunicipalityService {
             headers: { "Content-Type": "multipart/form-data" },
         });
     static editMunicipality = (id, body) =>
-        axios.post(`/municipality/single-manicipality-edit/${id}`, body);
+        axios.post(`/municipality/single-manicipality-edit/${id}`, body, {
+            headers: { "Content-Type": "multipart/form-data" },
+        });
 
     static deleteMunicipalities = (id) => axios.delete(`/municipality/${id}`);
 
