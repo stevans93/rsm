@@ -1,8 +1,9 @@
+import {FaRegEdit, FaRegUserCircle} from 'react-icons/fa'
 import {IoIosArrowBack, IoIosArrowForward} from 'react-icons/io'
 import React, {useEffect, useState} from 'react'
 
 import {BsThreeDotsVertical} from 'react-icons/bs'
-import {FaRegUserCircle} from 'react-icons/fa'
+import DashboardSettingsInfoEdit from '../../../../components/DashboardComponents/DashboardSettingsComponents/DashboardSettingsInfo/DashboardSettingsInfoEdit'
 import MunicipalityService from '../../../../services/municipalityService'
 import SearchCity from '../../../../components/SearchCity/SearchCity'
 import {useDispatch} from 'react-redux'
@@ -11,6 +12,10 @@ function DashboardCityBelgradeMobile() {
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1)
   const [belgradeMunicipalities, setBelgradeMunicipalities] = useState([])
+  const [showEditModal, setShowEditModal] = useState(false)
+  const [reLoad, setReLoad] = useState(false)
+
+  const [municipalityId, setMunicipalityId] = useState('')
   const [totalPages, setTotalPages] = useState(0)
   const [totalMunicipalities, setTotalMunicipalities] = useState(0)
   const perPage = 12
@@ -25,7 +30,7 @@ function DashboardCityBelgradeMobile() {
       .catch((err) => {
         console.log(err)
       })
-  }, [dispatch, currentPage, perPage])
+  }, [dispatch, currentPage, perPage, reLoad])
   return (
     <div className="mobile">
       <div className="flex flex-col w-full">
@@ -64,7 +69,14 @@ function DashboardCityBelgradeMobile() {
                         )}
                       </td>
                       <td className="text-main px-6 py-3 text-center text-[20px]">
-                        <BsThreeDotsVertical />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMunicipalityId(municipality._id)
+                            setShowEditModal(true)
+                          }}>
+                          <FaRegEdit />
+                        </button>
                       </td>
                     </tr>
                   )
@@ -104,6 +116,17 @@ function DashboardCityBelgradeMobile() {
           </div>
         </div>
       </div>
+      {showEditModal ? (
+        <div className="mx-auto absolute top-0 right-[50%] translate-x-[50%]">
+          <DashboardSettingsInfoEdit
+            showCloseBtn={true}
+            showEditModal={showEditModal}
+            setShowEditModal={setShowEditModal}
+            municipalityId={municipalityId}
+            setReLoad={setReLoad}
+          />
+        </div>
+      ) : null}
     </div>
   )
 }
