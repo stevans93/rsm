@@ -14,6 +14,8 @@ router.get(
 );
 router.post(
   "/single-manicipality-edit/:id",
+  upload.single("file"),
+  compressImages,
   require("../controller/municipalityController/editManicipality")
 );
 
@@ -22,6 +24,10 @@ router.post(
   upload.single("file"),
   compressImages,
   require("../controller/municipalityController/addMunicipality")
+);
+router.delete(
+  "/:id",
+  require("../controller/municipalityController/deleteMunicipality")
 );
 
 module.exports = router;

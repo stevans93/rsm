@@ -2,7 +2,7 @@ const UserModel = require("../../models/userModel");
 
 const getAllUsers = async (req, res) => {
   const pageNumber = parseInt(req.query.pageNumber) || 1;
-  const pageSize = parseInt(req.query.pageSize) || 10;
+  const pageSize = parseInt(req.query.pageSize) || 12;
   const search = req.query.search || '';
 
   try {
