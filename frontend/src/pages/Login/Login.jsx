@@ -110,11 +110,11 @@ function Login() {
         </div>
       ) : (
         <div className="flex flex-col md:flex-row justify-center items-center h-[100vh] gap-5 md:gap-[100px] xl:gap-[200px] iPSE">
-          <div>
-            <img src={mapa} alt="" className="w-[400px] logo" />
+          <div className='w-[400px]'>
+            {/* <img src={mapa} alt="" className="w-[400px] logo" /> */}
           </div>
 
-          <div className="px-[80px] pt-[50px] pb-[100px] rounded-xl shadowBorder iPSep">
+          <div className="px-[80px] pt-[50px] pb-[100px] rounded-xl shadowBorder iPSep bg-[#fff]">
             <form onSubmit={formik.handleSubmit} className="flex flex-col gap-3">
               <div className="flex justify-center">
                 <img src={logo} alt="" className="w-[250px] map" />

@@ -1,5 +1,4 @@
 import {RxCross1} from 'react-icons/rx'
-import img from '../../assets/Dragan_Markovic_Palma.jpg'
 
 function InfoAboutTheCity({closeModal, cityInfo}) {
   return (

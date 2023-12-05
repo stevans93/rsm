@@ -23,7 +23,7 @@ function DashboardCityList() {
         </div>
       ) : (
         <div>
-          <div className="mt-[30px] mx-[50px]">
+          <div className="mt-[30px] mx-[50px] lg:h-[100svh]">
             <DashboardCityListDesktop
               municipalities={municipalities}
               setReLoad={setReLoad}

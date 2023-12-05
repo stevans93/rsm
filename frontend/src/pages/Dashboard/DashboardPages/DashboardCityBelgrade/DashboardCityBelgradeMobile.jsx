@@ -2,7 +2,7 @@ import React from 'react';
 
 function DashboardCityBelgradeMobile() {
   return (
-    <div className='mobile'>DashboardCityBelgradeMobile</div>
+    <div className='mobile h-[100svh]'>DashboardCityBelgradeMobile</div>
   )
 }
 
