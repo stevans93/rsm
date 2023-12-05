@@ -17,6 +17,7 @@ mongoose.connect(DB_URL)
 
 
 fs.mkdirSync(process.env.MEDIA_LOCATION, { recursive: true });
+server.use(express.static(process.env.MEDIA_LOCATION));
 
 server.use(express.json({ limit: '10mb' }));
 

@@ -13,6 +13,8 @@ class UserService {
             },
         });
     };
+
+    static changePassword = (body) => axios.put('/user/changePassword', body)
 }
 
 export default UserService;
