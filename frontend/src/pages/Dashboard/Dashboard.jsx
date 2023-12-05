@@ -26,7 +26,6 @@ function Dashboard() {
       {!isLoading && (
         <div className="flex flex-col md:flex-row bg-[#F0F5F7]">
           <DashboardSidebar />
-          <ToastContainer />
           <Outlet />
         </div>
       )}

@@ -13,6 +13,7 @@ const addMunicipality = (req, res) => {
     addNewMunicipality.save()
         .then((addNewMunicipality) => {
             console.log(addNewMunicipality);
+            res.status(200).json('ok')
         })
         .catch((err) => {
             console.log(err);

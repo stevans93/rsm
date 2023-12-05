@@ -20,7 +20,11 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
 
         <div className="flex items-center justify-between">
           <div>
-            <img src={img} alt="img" className="w-[140px] h-[140px] rounded-2xl shadow" />
+            <img
+              src={import.meta.env.VITE_IMAGE_URL + cityInfo.image}
+              alt="img"
+              className="w-[140px] h-[140px] rounded-2xl shadow"
+            />
           </div>
 
           <div className="flex flex-col gap-3">

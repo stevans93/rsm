@@ -54,7 +54,7 @@ function DashboardCityListDesktop({municipalities}) {
                       <td className="px-6 py-3">
                         {municipality.image ? (
                           <img
-                            src={`${municipality.image}`}
+                            src={import.meta.env.VITE_IMAGE_URL + `${municipality.image}`}
                             alt={municipality.fullNameOfThePresident}
                             className="w-[40px] h-[40px]"
                           />
