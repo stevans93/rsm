@@ -37,7 +37,7 @@ function DashboardSettingsMobile() {
     }
 
   return (
-    <div className='mobile flex-col justify-center items-center'>
+    <div className='mobile flex-col md:justify-center items-center h-[100svh]'>
         <div>
             <div className='flex flex-col gap-3'>
                 <div className='flex flex-col border border-1 border-main py-2 px-3 rounded-2xl bg-main'>

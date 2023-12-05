@@ -24,7 +24,7 @@ function DashboardCityBelgrade() {
             </div>
         ) : (
             <div>
-                <div className='mt-[30px] mx-[50px]'>
+                <div className='mt-[30px] mx-[50px] lg:h-[100svh]'>
                     <DashboardCityBelgradeDesktop municipalities={municipalities} />                   
                 </div>
                 <div>

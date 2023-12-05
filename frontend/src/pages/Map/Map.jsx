@@ -6,6 +6,7 @@ import {MapData} from './MapData'
 import MapSideBar from '../../components/MapSideBar/MapSideBar'
 import MunicipalityService from '../../services/municipalityService'
 import {storeAllMunicipalities} from '../../store/municipalitySlice'
+import logo from '../../assets/Logo-compress.png'
 
 function Map() {
   const [hoveredPath, setHoveredPath] = useState(null)
@@ -102,7 +103,8 @@ function Map() {
 
   return (
     <div>
-      <div className="flex overflow-x-scroll relative w-full px-[20px] mt-[20px]">
+        
+      <div className="flex overflow-x-scroll lg:overflow-x-hidden relative w-full px-[20px] mt-[20px]">
         <div className="flex items-center md:pt-0 pt-[70px] justify-center md:w-[80%]">
           <svg xmlns="http://www.w3.org/2000/svg" width="544.1554" height="792.53302" fill="#fff" ref={mapContainerRef}>
             {MapData.map((path) => (
@@ -126,10 +128,14 @@ function Map() {
           </svg>
 
           {hoveredTitle && (
-            <div className="fixed md:absolute md:left-[36%] mx-auto top-[100px] text-sm md:text-base md:top-[1px] md:w-[40%] text-center lg:w-[300px] lg:left-[45%] text-2xl w-[60%] left-[20%] font-bold text-main shadow right-[450px] bg-[#fff] p-4 rounded-2xl">
+            <div className="absolute md:left-[36%] mx-auto top-[5px] text-sm md:text-base md:top-[1px] md:w-[40%] text-center lg:w-[300px] lg:left-[45%] text-2xl w-[60%] left-[20%] font-bold text-main shadow right-[450px] bg-[#fff] p-4 rounded-2xl">
               {hoveredTitle}
             </div>
           )}
+          
+          <div className='absolute bottom-2 left-[30px] z-0'>
+          <img src={logo} className="w-[160px]" />
+        </div>
         </div>
 
         <div
@@ -155,6 +161,8 @@ function Map() {
           </div>
         </div>
       )}
+
+      
     </div>
   )
 }

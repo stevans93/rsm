@@ -15,6 +15,7 @@ function Navigation() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+    const dropDownRefNew = useRef();
 
     const handleDropDown = () => {
         setDropDown(!dropDown);
@@ -39,6 +40,16 @@ function Navigation() {
         if(dropDownRef.current) {
             dropDownRef.current.style.maxHeight = dropDown ? `${dropDownRef.current.scrollHeight}px` : 0;
         }
+
+        const handleClickOutside = (event) => {
+            if (dropDownRefNew.current && !dropDownRefNew.current.contains(event.target)) {
+                setDropDown(false);
+            }
+          };
+          document.addEventListener('mousedown', handleClickOutside, true);
+          return () => {
+            document.removeEventListener('mousedown', handleClickOutside, true);
+          };
     }, [dropDown]);
 
     if (location.pathname === '/') {
@@ -46,7 +57,7 @@ function Navigation() {
       }
 
     return (
-        <div className="rounded-2xl shadow bg-[#fff] px-[20px] py-[10px] mx-[20px] mt-[20px]">
+        <div ref={dropDownRefNew} className="rounded-2xl shadow bg-[#fff] px-[20px] py-[10px] mx-[20px] mt-[20px]">
 
             <div>
                 <div className="flex justify-center md:hidden">
