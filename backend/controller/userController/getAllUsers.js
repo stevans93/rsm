@@ -3,12 +3,22 @@ const UserModel = require("../../models/userModel");
 const getAllUsers = async (req, res) => {
   const pageNumber = parseInt(req.query.pageNumber) || 1;
   const pageSize = parseInt(req.query.pageSize) || 10;
+  const search = req.query.search || '';
 
   try {
-    const totalUsers = await UserModel.countDocuments({});
+    const searchValue = search ? {
+      $or: [
+        { firstName: { $regex: search, $options: 'i' } },
+        { lastName: { $regex: search, $options: 'i' } },
+      ],
+    } : null
+
+    const totalUsers = await UserModel.countDocuments({ ...searchValue });
     const totalPages = Math.ceil(totalUsers / pageSize);
 
-    const users = await UserModel.find({})
+
+
+    const users = await UserModel.find({ ...searchValue })
       .skip((pageNumber - 1) * pageSize)
       .limit(pageSize);
 

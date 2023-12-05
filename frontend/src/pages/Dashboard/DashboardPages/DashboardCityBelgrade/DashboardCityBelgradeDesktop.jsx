@@ -12,7 +12,7 @@ function DashboardCityBelgradeDesktop({municipalities2}) {
   const [currentPage, setCurrentPage] = useState(1)
   const [belgradeMunicipalities, setBelgradeMunicipalities] = useState([])
   const [totalPages, setTotalPages] = useState(0)
-  const perPage = 2
+  const perPage = 12
 
   useEffect(() => {
     MunicipalityService.allMunicipalities(currentPage, perPage, 'Grad Beograd')
@@ -30,7 +30,7 @@ function DashboardCityBelgradeDesktop({municipalities2}) {
     <div className="desktop">
       <div className="table-responsive">
         <div className="flex justify-between items-center mb-[50px]">
-          <h2 className="text-[40px] font-bold">Lista Opština</h2>
+          <h2 className="text-[40px] font-bold">Beograd Opština</h2>
           <SearchCity />
         </div>
         <div>

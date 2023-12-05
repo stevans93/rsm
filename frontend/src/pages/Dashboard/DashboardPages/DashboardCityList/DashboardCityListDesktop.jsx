@@ -17,7 +17,7 @@ function DashboardCityListDesktop({municipalities}) {
   const [showEditModal, setShowEditModal] = useState(false)
   const [municipalityId, setMunicipalityId] = useState('')
   const [reLoad, setReLoad] = useState(false)
-  const perPage = 3
+  const perPage = 12
 
   useEffect(() => {
     MunicipalityService.allMunicipalities(currentPage, perPage)
@@ -93,7 +93,13 @@ function DashboardCityListDesktop({municipalities}) {
                       className="text-[22px]"
                       onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                     />
-                    <IoIosArrowForward className="text-[22px]" onClick={() => setCurrentPage((prev) => prev + 1)} />
+                    <IoIosArrowForward
+                      className="text-[22px]"
+                      onClick={() => {
+                        if (currentPage === totalPages) return
+                        setCurrentPage((prev) => prev + 1)
+                      }}
+                    />
                   </td>
                 </tr>
               </tfoot>

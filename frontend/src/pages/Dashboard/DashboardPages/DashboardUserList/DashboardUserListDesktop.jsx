@@ -15,8 +15,8 @@ function DashboardUserListDesktop({users}) {
   const [totalPages, setTotalPages] = useState()
   const [totalUsers, setTotalUsers] = useState()
 
-  const fetchData = () => {
-    UserService.getAllUsers(pageNumber, pageSize)
+  const fetchData = (search) => {
+    UserService.getAllUsers(pageNumber, pageSize, search)
       .then((res) => {
         dispatch(storeAllUsers(res.data.users))
         setTotalPages(res.data.totalPages)
@@ -51,7 +51,7 @@ function DashboardUserListDesktop({users}) {
     <div className="desktop">
       <div>
         <div className="flex flex-col">
-          <h2 className="text-[40px] font-bold mb-[50px]">Lista Korisnika</h2>
+          <h2 className="text-[40px] font-bold mb-[50px]">Lista Funkcionera</h2>
         </div>
         <div>
           <SearchUser setPageSize={setPageSize} getData={fetchData} />

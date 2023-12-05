@@ -1,9 +1,10 @@
 import * as Yup from 'yup'
 
+import React, {useEffect} from 'react'
+
 import {FaPlus} from 'react-icons/fa6'
 import {FaUpload} from 'react-icons/fa'
 import {IoSearch} from 'react-icons/io5'
-import React from 'react'
 import {TfiExport} from 'react-icons/tfi'
 import UserService from '../../services/userService'
 import {useFormik} from 'formik'
@@ -15,6 +16,7 @@ function SearchUser({setPageSize, getData}) {
   let MB = KB * 1024
 
   const [open, setOpen] = useState(false)
+  const [search, setSearch] = useState('')
 
   const handleOpen = () => {
     setOpen(!open)
@@ -24,6 +26,10 @@ function SearchUser({setPageSize, getData}) {
     const newSize = parseInt(event.target.value, 10)
     setPageSize(newSize)
   }
+
+  useEffect(() => {
+    getData(search)
+  }, [search])
 
   const formik = useFormik({
     initialValues: {
@@ -86,11 +92,11 @@ function SearchUser({setPageSize, getData}) {
     <div className="w-[100%] bg-[#fff] rounded-lg shadowBorder">
       <div className="flex items-center justify-between text-[13px] p-4">
         <div className="flex items-center gap-3">
-          <h3>Lista Korisnika</h3>
+          <h3>Lista Funkcionera</h3>
           <button
             onClick={handleOpen}
             className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
-            <FaPlus /> Dodaj Novog Korisnika
+            <FaPlus /> Dodaj Novog Funkcionera
           </button>
 
           <span className="text-[13px]">Show</span>
@@ -105,12 +111,17 @@ function SearchUser({setPageSize, getData}) {
 
         <div className="flex gap-3">
           <div className="relative flex">
-            <input type="text" className="border border-1 rounded-full px-2" placeholder="Ime..." />
+            <input
+              type="text"
+              className="border border-1 rounded-full px-2"
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Ime..."
+            />
             <IoSearch className="absolute top-[6px] right-3" />
           </div>
-          <button className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
+          {/* <button className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
             <TfiExport /> Izvezi
-          </button>
+          </button> */}
         </div>
       </div>
 
