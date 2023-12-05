@@ -1,18 +1,24 @@
-import React from 'react'
-import {RxCross1} from 'react-icons/rx'
-import img from '../../assets/Dragan_Markovic_Palma.jpg'
+import { RxCross1 } from "react-icons/rx";
+import img from "../../assets/Dragan_Markovic_Palma.jpg";
 
-function InfoAboutTheCity({closeModal, cityInfo}) {
+function InfoAboutTheCity({ closeModal, cityInfo }) {
   return (
     <div className="bg-[#fff] w-[720px] h-[320px] rounded-2xl shadow p-[30px]">
       <div className="flex flex-col h-[100%] justify-between">
-        <div className="flex relative">
+        <div className="flex relative ">
           <div>
-            <h2 className="text-main text-[35px] font-bold">{cityInfo?.municipality}</h2>
-            <p className="text-[12px] text-spanGray">Okrug: {cityInfo?.district}</p>
+            <h2 className="text-main text-[35px] font-bold">
+              {cityInfo?.municipality}
+            </h2>
+            <p className="text-[12px] text-spanGray">
+              Okrug: {cityInfo?.district}
+            </p>
           </div>
           <div className="absolute top-5 right-5">
-            <div className="border border-2 p-1 rounded-2xl text-spanGray hover:text-main" onClick={closeModal}>
+            <div
+              className="border border-2 p-1 rounded-2xl text-spanGray hover:text-main"
+              onClick={closeModal}
+            >
               <RxCross1 />
             </div>
           </div>
@@ -29,16 +35,20 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
 
           <div className="flex flex-col gap-3">
             <p className="text-[14px]">
-              Predsednik: <span className="text-spanGray">{cityInfo?.fullNameOfThePresident}</span>{' '}
+              Predsednik:{" "}
+              <span className="text-spanGray">
+                {cityInfo?.fullNameOfThePresident}
+              </span>{" "}
             </p>
             <p className="text-[14px]">
-              Datum Rođenja: <span className="text-spanGray">{cityInfo?.dateOfBirth}</span>{' '}
+              Datum Rođenja:{" "}
+              <span className="text-spanGray">{cityInfo?.dateOfBirth}</span>{" "}
             </p>
             <p className="text-[14px]">
-              Email: <span className="text-spanGray">{cityInfo?.email}</span>{' '}
+              Email: <span className="text-spanGray">{cityInfo?.email}</span>{" "}
             </p>
             <p className="text-[14px]">
-              Telefon: <span className="text-spanGray">{cityInfo?.phone}</span>{' '}
+              Telefon: <span className="text-spanGray">{cityInfo?.phone}</span>{" "}
             </p>
           </div>
 
@@ -56,7 +66,7 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default InfoAboutTheCity
+export default InfoAboutTheCity;
