@@ -18,11 +18,7 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
 
         <div className="flex gap-10 pt-6">
           <div>
-            <img
-              src={import.meta.env.VITE_IMAGE_URL + cityInfo.image}
-              alt="img"
-              className="w-[140px] h-[140px] rounded-2xl shadow"
-            />
+            <img src={import.meta.env.VITE_IMAGE_URL + cityInfo.image} alt="img" className="rounded-2xl shadow" />
           </div>
 
           <div className="flex w-[60%] flex-col gap-3 ">
