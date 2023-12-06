@@ -6,13 +6,17 @@
 * {
     font-family: "Poppins";
 }
+#root {
+height: 100%;
+/* background-color: #F0F5F7;  */
+}
 
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
     position: relative; 
-    background-color: rgba(128, 128, 128);
+    /* background-color: rgba(128, 128, 128); */
 }
 
 body::before {
@@ -29,6 +33,12 @@ body::before {
     background-repeat: no-repeat;
     opacity: 0.2;
 }
+.no-before-background::before {
+    background-image:none;
+    background-color:#F0F5F7;
+    opacity: none;
+
+  }
 
 p, span, label, input {
     color: #232349;

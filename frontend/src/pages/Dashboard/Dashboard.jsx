@@ -9,11 +9,18 @@ function Dashboard() {
   const [showGlobalLoader, setShowGlobalLoader] = useState(true)
 
   useEffect(() => {
+    document.body.classList.add('no-before-background')
+
     // Simulate an API call or any other async operation
-    setTimeout(() => {
+    const timeOut = setTimeout(() => {
       setIsLoading(false)
       setShowGlobalLoader(false) // Set to false after loading completes
     }, 1500)
+
+    return () => {
+      clearTimeout(timeOut)
+      document.body.classList.remove('no-before-background')
+    }
   }, [])
 
   return (
