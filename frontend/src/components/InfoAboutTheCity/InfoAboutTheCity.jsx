@@ -4,7 +4,7 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
   return (
     <div className="bg-[#fff] w-[980px] h-[380px] rounded-2xl shadow p-[30px] relative mx-auto  ">
       <div className="flex flex-col h-[100%] justify-between">
-        <div className="flex ">
+        <div className="flex w-full">
           <div className="flex flex-col gap-1">
             <h2 className="text-main text-[35px] font-bold">{cityInfo?.municipality}</h2>
             <p className="text-[12px] text-spanGray">Okrug: {cityInfo?.district}</p>
@@ -25,7 +25,7 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
             />
           </div>
 
-          <div className="flex flex-col gap-3 mr-14">
+          <div className="flex w-[60%] flex-col gap-3 ">
             <p className="text-[14px]">
               Predsednik: <span className="text-spanGray">{cityInfo?.fullNameOfThePresident}</span>{' '}
             </p>
@@ -51,14 +51,14 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
           <div className="flex flex-col gap-2 text-center">
             <a
               target="_blank"
-              href={`${import.meta.env.VITE_IMAGE_URL}${cityInfo?.numberOfOfficials}`}
+              href={`${cityInfo?.numberOfOfficials}`}
               className=" border-2 border-main px-[30px] py-[10px] text-main text-[14px] rounded-2xl hover:bg-main hover:border-main hover:text-[#fff]"
               rel="noreferrer">
               Broj Gradskih/opstinskih funkcionera
             </a>
             <a
               target="_blank"
-              href={`${import.meta.env.VITE_IMAGE_URL}${cityInfo?.numberOfOfficials}`}
+              href={`${cityInfo?.numberOfOfficials}`}
               rel="noreferrer"
               className=" border-2 border-main px-[30px] py-[10px] text-main text-[14px] rounded-2xl hover:bg-main hover:border-main hover:text-[#fff]">
               Broj predstavki gradjana
