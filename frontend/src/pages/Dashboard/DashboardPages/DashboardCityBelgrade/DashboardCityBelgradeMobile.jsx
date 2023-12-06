@@ -132,5 +132,3 @@ function DashboardCityBelgradeMobile() {
 }
 
 export default DashboardCityBelgradeMobile
-
-export default DashboardCityBelgradeMobile

@@ -69,13 +69,21 @@ function DashboardSidebar() {
               className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
               <FaCity /> Beogradske Opštine
             </NavLink>
-            <button className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
+            <a
+              target="_blank"
+              href="https://cloud.digitalhousepower.rs/index.php/s/fJjkGSo6L2qf86d"
+              className="flex justify-center text-center items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"
+              rel="noreferrer">
               Beograd Gradski Funkcioneri
-            </button>
-            <button className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
+            </a>
+            <a
+              target="_blank"
+              href="https://cloud.digitalhousepower.rs/index.php/s/fmmDe3fL47ge9KS"
+              className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"
+              rel="noreferrer">
               <FaCity />
               RSG Baza
-            </button>
+            </a>
           </div>
         </div>
         <div className="flex flex-col gap-8">
@@ -133,12 +141,20 @@ function DashboardSidebar() {
             className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
             Beogradske Opštine
           </NavLink>
-          <button className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
-            RSG Baza
-          </button>
-          <button className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
+          <a
+            target="_blank"
+            href="https://cloud.digitalhousepower.rs/index.php/s/fJjkGSo6L2qf86d"
+            className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]"
+            rel="noreferrer">
             Beograd Gradski Funkcioneri
-          </button>
+          </a>
+          <a
+            target="_blank"
+            href="https://cloud.digitalhousepower.rs/index.php/s/fmmDe3fL47ge9KS"
+            className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]"
+            rel="noreferrer">
+            RSG Baza
+          </a>
           <button
             onClick={handleLogOut}
             className="border border-2 rounded-2xl px-[30px] py-[5px] border-red text-red hover:bg-red hover:text-[#fff]">
