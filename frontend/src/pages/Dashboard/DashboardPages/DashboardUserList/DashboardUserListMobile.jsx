@@ -60,7 +60,7 @@ function DashboardUserListMobile({users = []}) {
     <div className="mobile">
       <div className="w-full">
         <div className="flex flex-col">
-          <h2 className="text-[30px] font-bold mb-[50px]">Lista Funkcionera</h2>
+          <h2 className="text-[30px] font-bold mb-[50px]">Koordinatori/Funkcioneri</h2>
         </div>
         <div>
           <SearchUser setPageSize={setPageSize} getData={fetchData} />

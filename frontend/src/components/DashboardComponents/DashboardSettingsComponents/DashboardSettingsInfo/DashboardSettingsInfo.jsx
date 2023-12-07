@@ -17,7 +17,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal}) {
       district: '',
       municipality: '',
       fullNameOfThePresident: '',
-      dateOfBirth: '',
+      profession: '',
       email: '',
       phone: '',
       numberOfOfficials: '',
@@ -32,7 +32,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal}) {
       district: Yup.string().required('Polje je obavezno...'),
       municipality: Yup.string().required('Polje je obavezno...'),
       fullNameOfThePresident: Yup.string().required('Polje je obavezno...'),
-      dateOfBirth: Yup.string().required('Polje je obavezno...'),
+      profession: Yup.string().required('Polje je obavezno...'),
       email: Yup.string().required('Polje je obavezno...'),
       phone: Yup.string().required('Polje je obavezno...'),
       website: Yup.string().required('Polje je obavezno...'),
@@ -73,7 +73,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal}) {
         </div>
       ) : null}
       <div className="w-[40%]">
-        <h2 className="text-[22px] text-main">Dodaj Podatke</h2>
+        <h2 className="text-[22px] text-main">Dodavanje Podataka</h2>
         <p className="text-[10px] text-spanGray">
           Dodavanje Podataka Okruga, Opštine, Grada i Predsednika možete dodati ovde.
         </p>
@@ -188,16 +188,15 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal}) {
 
               <div className="flex flex-col items-center xl:items-start  justify-between">
                 <label>
-                  Datum Rođenja Predsednika{' '}
-                  <span className="text-red italic text-[13px]">{showError('dateOfBirth')}</span>
+                  Zanimanje <span className="text-red italic text-[13px]">{showError('profession')}</span>
                 </label>
                 <input
-                  value={formik.values.dateOfBirth}
+                  value={formik.values.profession}
                   onChange={formik.handleChange}
                   type="text"
-                  name="dateOfBirth"
+                  name="profession"
                   className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-full"
-                  placeholder="Unesite Datum Rođenja..."
+                  placeholder="Unesite zanimanje..."
                 />
               </div>
             </div>

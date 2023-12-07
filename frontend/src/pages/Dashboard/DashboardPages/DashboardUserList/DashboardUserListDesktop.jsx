@@ -60,7 +60,7 @@ function DashboardUserListDesktop({users}) {
     <div className="desktop">
       <div>
         <div className="flex flex-col">
-          <h2 className="text-[40px] font-bold mb-[50px]">Lista Funkcionera</h2>
+          <h2 className="text-[40px] font-bold mb-[50px]">Koordinatori/Funkcioneri</h2>
         </div>
         <div>
           <SearchUser setPageSize={setPageSize} getData={fetchData} />

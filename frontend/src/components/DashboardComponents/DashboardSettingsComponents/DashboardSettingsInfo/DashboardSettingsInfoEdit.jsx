@@ -32,7 +32,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
       municipality: singleManic.municipality || '',
       city: singleManic.city || '',
       fullNameOfThePresident: singleManic.fullNameOfThePresident || '',
-      dateOfBirth: singleManic.dateOfBirth || '',
+      profession: singleManic.profession || '',
       email: singleManic.email || '',
       phone: singleManic.phone || '',
       numberOfOfficials: singleManic.numberOfOfficials || '',
@@ -46,7 +46,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
       municipality: Yup.string(),
       city: Yup.string(),
       fullNameOfThePresident: Yup.string(),
-      dateOfBirth: Yup.string(),
+      profession: Yup.string(),
       email: Yup.string(),
       phone: Yup.string(),
       numberOfOfficials: Yup.string(),
@@ -91,10 +91,10 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
         </div>
       ) : null}
       <div className="w-[40%]">
-        <h2 className="text-[22px] text-main">Dodaj Podatke</h2>
+        <h2 className="text-[22px] text-main">Izmena Podataka</h2>
 
         <p className="text-[10px] text-spanGray">
-          Dodavanje Podataka Okruga, Opštine, Grada i Predsednika možete dodati ovde.
+          Izmena Podataka Okruga, Opštine, Grada i Predsednika možete dodati ovde.
         </p>
       </div>
 
@@ -207,16 +207,15 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
 
               <div className="flex flex-col gap-1 items-start   justify-between">
                 <label>
-                  Datum Rođenja Predsednika{' '}
-                  <span className="text-red italic text-[13px]">{showError('dateOfBirth')}</span>
+                  Zanimanje <span className="text-red italic text-[13px]">{showError('profession')}</span>
                 </label>
                 <input
-                  value={formik.values.dateOfBirth}
+                  value={formik.values.profession}
                   onChange={formik.handleChange}
                   type="text"
-                  name="dateOfBirth"
+                  name="profession"
                   className="border border-1 border-main rounded-xl px-4 py-2  w-full"
-                  placeholder="Unesite Datum Rođenja..."
+                  placeholder="Unesite zanimanje..."
                 />
               </div>
             </div>
@@ -300,7 +299,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
           </div>
 
           <button className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
-            Dodaj Podatke
+            Izmeni Podatke
           </button>
         </div>
       </form>
@@ -426,14 +425,14 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
                 <label>
                   Datum Rođenja Predsednika{" "}
                   <span className="text-red italic text-[13px]">
-                    {showError("dateOfBirth")}
+                    {showError("profession")}
                   </span>
                 </label>
                 <input
-                  value={formik.values.dateOfBirth}
+                  value={formik.values.profession}
                   onChange={formik.handleChange}
                   type="text"
-                  name="dateOfBirth"
+                  name="profession"
                   className="border border-1 border-main rounded-xl px-4 py-2 w-auto lg:w-[200px]"
                   placeholder="Unesite Datum Rođenja..."
                 />

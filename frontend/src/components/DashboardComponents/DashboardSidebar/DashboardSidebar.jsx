@@ -3,6 +3,8 @@ import {Link, NavLink, useNavigate} from 'react-router-dom'
 import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
+import InfoAboutTheCity from '../../InfoAboutTheCity/InfoAboutTheCity'
+import InfoAboutTheCityMobile from '../../InfoAboutTheCity/InfoAboutTheCityMobile'
 import {IoIosArrowBack} from 'react-icons/io'
 import {IoSettingsOutline} from 'react-icons/io5'
 import {PiUsersThree} from 'react-icons/pi'
@@ -16,7 +18,6 @@ function DashboardSidebar() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const dropDownRef = useRef(null)
-
   const handleDropDown = () => {
     setDropDown(!dropDown)
   }
@@ -57,25 +58,25 @@ function DashboardSidebar() {
             <NavLink
               to="/dashboard/userList"
               className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
-              <PiUsersThree /> Lista Funkcionera
+              <PiUsersThree /> Koordinatori/Funkcioneri
             </NavLink>
             <NavLink
               to="/dashboard/cityList"
               className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
-              <FaCity /> Lista Gradova/Opština
+              <FaCity /> Gradovi/Opštine
             </NavLink>
             <NavLink
               to="/dashboard/cityBelgrade"
               className="flex justify-start items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]">
               <FaCity /> Beogradske Opštine
             </NavLink>
-            <a
+            {/* <a
               target="_blank"
               href="https://cloud.digitalhousepower.rs/index.php/s/fJjkGSo6L2qf86d"
               className="flex justify-center text-center items-center text-main gap-3 text-[20px] border border-2 rounded-full w-[100%] py-2 px-2 border-main text-main hover:bg-main hover:text-[#fff]"
               rel="noreferrer">
               Beograd Gradski Funkcioneri
-            </a>
+            </a> */}
             <a
               target="_blank"
               href="https://cloud.digitalhousepower.rs/index.php/s/fmmDe3fL47ge9KS"
@@ -129,25 +130,25 @@ function DashboardSidebar() {
           <NavLink
             to="/dashboard/userList"
             className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
-            Lista Funkcionera
+            Koordinatori/Funkcioneri
           </NavLink>
           <NavLink
             to="/dashboard/cityList"
             className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
-            Lista Gradova/Opština
+            Gradovi/Opštine
           </NavLink>
           <NavLink
             to="/dashboard/cityBelgrade"
             className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]">
             Beogradske Opštine
           </NavLink>
-          <a
+          {/* <a
             target="_blank"
             href="https://cloud.digitalhousepower.rs/index.php/s/fJjkGSo6L2qf86d"
             className="border border-2 rounded-2xl px-[30px] py-[5px] border-main text-main hover:bg-main hover:text-[#fff]"
             rel="noreferrer">
             Beograd Gradski Funkcioneri
-          </a>
+          </a> */}
           <a
             target="_blank"
             href="https://cloud.digitalhousepower.rs/index.php/s/fmmDe3fL47ge9KS"

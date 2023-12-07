@@ -23,10 +23,11 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
 
           <div className="flex w-[60%] flex-col gap-3 ">
             <p className="text-[14px]">
-              Predsednik: <span className="text-spanGray">{cityInfo?.fullNameOfThePresident}</span>{' '}
+              Gradonačelnik/predsednik opštine:{' '}
+              <span className="text-spanGray">{cityInfo?.fullNameOfThePresident}</span>{' '}
             </p>
             <p className="text-[14px]">
-              Datum Rođenja: <span className="text-spanGray">{cityInfo?.dateOfBirth}</span>{' '}
+              Zanimanje: <span className="text-spanGray">{cityInfo?.profession}</span>{' '}
             </p>
             <p className="text-[14px]">
               Email: <span className="text-spanGray">{cityInfo?.email}</span>{' '}
@@ -35,11 +36,11 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
               Telefon: <span className="text-spanGray">{cityInfo?.phone}</span>{' '}
             </p>
             <p className="text-[14px]">
-              Ukupan broj Gradskih/opstinskih funkcionera:{' '}
+              Broj Gradskih/opštinskih funkcionera:{' '}
               <span className="text-spanGray">{cityInfo?.fullNumberOfOfficials}</span>{' '}
             </p>
             <p className="text-[14px]">
-              Ukupan broj predstavki gradjana:{' '}
+              Broj evidentiranih predstavki građana:{' '}
               <span className="text-spanGray">{cityInfo?.fullNumberOfApplications}</span>{' '}
             </p>
           </div>
@@ -50,21 +51,21 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
               href={`${cityInfo?.numberOfOfficials}`}
               className=" border-2 border-main px-[30px] py-[10px] text-main text-[14px] rounded-2xl hover:bg-main hover:border-main hover:text-[#fff]"
               rel="noreferrer">
-              Broj Gradskih/opstinskih funkcionera
+              Gradski/Opštinski funkcioneri – Baza
             </a>
             <a
               target="_blank"
               href={`${cityInfo?.numberOfOfficials}`}
               rel="noreferrer"
               className=" border-2 border-main px-[30px] py-[10px] text-main text-[14px] rounded-2xl hover:bg-main hover:border-main hover:text-[#fff]">
-              Broj predstavki gradjana
+              Predsetavke građana – Baza
             </a>
             <a
               target="_blank"
               href={cityInfo.website}
               className=" border-2 border-main px-[30px] py-[10px] text-main text-[14px] rounded-2xl hover:bg-main hover:border-main hover:text-[#fff]"
               rel="noreferrer">
-              Sajt Opštine
+              Sajt opštine – Link
             </a>
           </div>
         </div>

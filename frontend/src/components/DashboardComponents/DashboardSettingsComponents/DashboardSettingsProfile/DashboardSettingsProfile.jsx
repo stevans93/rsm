@@ -123,14 +123,18 @@ function DashboardSettingsProfile() {
               <label>
                 Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
               </label>
-              <input
+              <select
                 value={formik.values.title}
                 onChange={formik.handleChange}
                 name="title"
-                type="text"
-                className="border border-1 border-main rounded-xl px-3 py-2"
-                placeholder="Pozicija..."
-              />
+                className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]">
+                <option value="" disabled>
+                  Select Poziciju...
+                </option>
+                <option value="admin">Admin</option>
+                <option value="funkcioner">Funkcioner</option>
+                {/* Add more options as needed */}
+              </select>
             </div>
 
             <div className="flex flex-col lg:flex-row items-center w-[100%] justify-between">

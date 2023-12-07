@@ -93,12 +93,12 @@ function SearchUser({setPageSize, getData}) {
       <div className="w-full items-center md:justify-between flex flex-col gap-3 md:flex-row text-[13px] p-4">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex flex-col md:flex-row items-center gap-3">
-            <h3>Lista Funkcionera</h3>
+            <h3>Koordinatori/Funkcioneri</h3>
 
             <button
               onClick={handleOpen}
               className="flex items-center gap-2 border border-main px-3 py-1 rounded-md bg-main text-[#fff]">
-              <FaPlus /> Dodaj Novog Funkcionera
+              <FaPlus /> Dodaj Novog Koordinatori/Funkcioneri
             </button>
             <div className="flex flex-row items-center gap-2 ">
               <span className="text-[13px]">Show</span>

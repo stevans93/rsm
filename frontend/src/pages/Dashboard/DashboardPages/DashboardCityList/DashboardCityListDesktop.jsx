@@ -42,7 +42,7 @@ function DashboardCityListDesktop({municipalities}) {
     <div className="desktop relative">
       <div className="table-responsive">
         <div className="flex justify-between items-center mb-[50px]">
-          <h2 className="text-[40px] font-bold">Lista Gradova/Opština</h2>
+          <h2 className="text-[40px] font-bold">Gradovi/Opštine</h2>
           <SearchCity setSearch={setSearch} />
         </div>
         <div>
@@ -52,7 +52,7 @@ function DashboardCityListDesktop({municipalities}) {
                 <tr className="text-left  bg-[#F0F5F7] p-[50px] border-b-2 border-main">
                   <th className="px-6 py-6">Okrug</th>
                   <th className="px-6 py-6">Grad/Opština</th>
-                  <th className="px-6 py-6">Predsednik</th>
+                  <th className="px-6 py-6">Gradonačelnik/predsednik opštine</th>
                   <th className="px-6 py-6">Slika</th>
                   <th className="px-6 py-6">Akcija</th>
                 </tr>

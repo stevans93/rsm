@@ -67,11 +67,13 @@ function DashboardSettingsUser() {
 
   return (
     <div className="bg-[#fff] p-5 rounded-3xl shadowBorder w-[310px] lg:w-[500px] mx-auto dashboard">
-      <div className="w-[50%]">
-        <h2 className="text-[22px] text-main">Dodaj Funkcionera</h2>
-        <p className="text-[10px] text-spanGray">
-          Podešavanja vaseg profila možete uraditi ovde ovo je vidljivo samo vama.
-        </p>
+      <div className="w-full">
+        <h2 className="text-[22px] text-main">Dodavanje koordinatora/funkcionera</h2>
+        <div className="w-1/2">
+          <p className="text-[10px] text-spanGray">
+            Dodavanje koordinatora/funkcionera možete uraditi ovde ovo je vidljivo samo vama.
+          </p>
+        </div>
       </div>
 
       <form onSubmit={formik.handleSubmit} className="flex flex-col mt-[30px]">
@@ -102,8 +104,10 @@ function DashboardSettingsUser() {
           </label>
 
           <div>
-            <h3 className="text-[16px]">Slika Funkcionera</h3>
-            <span className="text-[10px] text-spanGray">Slika Funkcionera maksimalna veličina do 10MB</span>
+            <h3 className="text-[16px]">Slika koordinatora/funkcionera</h3>
+            <span className="text-[10px] text-spanGray">
+              Slika koordinatora/funkcionera maksimalna veličina do 10MB
+            </span>
             <br />
             {/* <span className='text-red italic text-[13px]'>{showError('image')}</span> */}
           </div>
@@ -160,14 +164,18 @@ function DashboardSettingsUser() {
                 <label>
                   Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
                 </label>
-                <input
+                <select
                   value={formik.values.title}
                   onChange={formik.handleChange}
-                  type="text"
                   name="title"
-                  className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]"
-                  placeholder="Unesite Poziciju..."
-                />
+                  className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]">
+                  <option value="" disabled>
+                    Select Poziciju...
+                  </option>
+                  <option value="admin">Admin</option>
+                  <option value="funkcioner">Funkcioner</option>
+                  {/* Add more options as needed */}
+                </select>
               </div>
 
               <div className="flex flex-col items-center xl:items-start  justify-between">

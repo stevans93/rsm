@@ -120,7 +120,7 @@ function DashboardSettingsDesktop() {
                   <div>
                     <p className={`text-[24px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`}>Funkcioneri</p>
                     <span className={`text-[12px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-spanGray'}`}>
-                      Dodavanje Funkcionera Platforme
+                      Dodavanje koordinatora/funkcionera
                     </span>
                   </div>
                 </div>
@@ -137,7 +137,9 @@ function DashboardSettingsDesktop() {
                 <div className="flex items-center gap-5">
                   <FaInfo className="text-5xl text-main bg-[#fff] rounded-xl" />
                   <div>
-                    <p className={`text-[24px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`}>Podaci</p>
+                    <p className={`text-[24px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`}>
+                      Unos podataka
+                    </p>
                     <span className={`text-[12px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-spanGray'}`}>
                       Dodavanje Podataka
                     </span>
