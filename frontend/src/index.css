@@ -65,7 +65,7 @@ input:-webkit-autofill{
 }
 
 .divHover:hover {
-    background-color: #A3C8DB;
+    background-color: #111139;
 }
   
 .divHover:hover p,
@@ -79,12 +79,12 @@ input:-webkit-autofill{
 }
 
 .active {
-    background: #A3C8DB;
+    background: #111139;
     color: #fff;
 }
 
 .divActive {
-    background: #A3C8DB;
+    background: #111139;
 }
 
 .overlay {

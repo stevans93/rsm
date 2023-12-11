@@ -116,7 +116,7 @@ function Map() {
                   title={path.title}
                   id={path.id}
                   stroke={path.stroke}
-                  fill={hoveredPath === path.id || selectedPathId === path.id ? '#A3C8DB' : '#fff'}
+                  fill={hoveredPath === path.id || selectedPathId === path.id ? '#222477' : '#fff'}
                   onClick={(event) => {
                     handlePathClick(event, path.id, path.title)
                     setSidebar(true)

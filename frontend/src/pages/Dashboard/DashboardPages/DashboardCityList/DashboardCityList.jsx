@@ -20,7 +20,7 @@ function DashboardCityList() {
     <div className="lg:w-[100%] sm:ml-[30%] md:ml-[40%] lg:ml-[20%]">
       {isLoading ? (
         <div className="w-[60vw] h-[100vh] m-auto">
-          <BounceLoader color="#A3C8DB" className="spin" />
+          <BounceLoader color="#222477" className="spin" />
         </div>
       ) : (
         <div>

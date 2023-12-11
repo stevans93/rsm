@@ -27,7 +27,7 @@ function Dashboard() {
     <>
       {showGlobalLoader && (
         <div className="w-full h-[100vh]">
-          <BounceLoader color="#A3C8DB" className="spin" />
+          <BounceLoader color="#222477" className="spin" />
         </div>
       )}
       {!isLoading && (

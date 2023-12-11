@@ -8,6 +8,8 @@ import {useFormik} from 'formik'
 
 function DashboardSettingsUser() {
   const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
+  const user = JSON.parse(localStorage.getItem('rsm_user'))
+
   let KB = 1024
   let MB = KB * 1024
 
@@ -160,23 +162,25 @@ function DashboardSettingsUser() {
             </div>
 
             <div className="flex flex-col gap-4 w-[50%]">
-              <div className="flex flex-col items-center xl:items-start  justify-between">
-                <label>
-                  Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
-                </label>
-                <select
-                  value={formik.values.title}
-                  onChange={formik.handleChange}
-                  name="title"
-                  className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]">
-                  <option value="" disabled>
-                    Select Poziciju...
-                  </option>
-                  <option value="admin">Admin</option>
-                  <option value="funkcioner">Funkcioner</option>
-                  {/* Add more options as needed */}
-                </select>
-              </div>
+              {user.role === 'admin' && (
+                <div className="flex flex-col items-center xl:items-start  justify-between">
+                  <label>
+                    Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
+                  </label>
+                  <select
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
+                    name="title"
+                    className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]">
+                    <option value="" disabled>
+                      Select Poziciju...
+                    </option>
+                    <option value="admin">Admin</option>
+                    <option value="funkcioner">Funkcioner</option>
+                    {/* Add more options as needed */}
+                  </select>
+                </div>
+              )}
 
               <div className="flex flex-col items-center xl:items-start  justify-between">
                 <label>

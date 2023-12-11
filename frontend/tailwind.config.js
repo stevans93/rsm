@@ -8,9 +8,9 @@ export default {
       },
     },
     colors: {
-      main: "#A3C8DB",
-      secondMain: "#5B8FA9",
-      primary: "#A3C8DB",
+      main: "#222477",
+      secondMain: "#111139",
+      primary: "#222477",
       secondary: "#1B1F23",
       red: "rgb(220 38 38)",
       grey: "#A8A8A8",

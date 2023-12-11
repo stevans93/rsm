@@ -106,7 +106,7 @@ function Login() {
     <>
       {isLoading ? (
         <div className="w-full h-[100vh]">
-          <BounceLoader color="#A3C8DB" className="spin" />
+          <BounceLoader color="#222477" className="spin" />
         </div>
       ) : (
         <div className="flex flex-col md:flex-row justify-center items-center h-[100vh] gap-5 md:gap-[100px] xl:gap-[200px] iPSE">

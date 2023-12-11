@@ -54,35 +54,30 @@ function DashboardSettingsProfile() {
       <form onSubmit={formik.handleSubmit} className="mt-[30px] text-center">
         <div className="flex flex-col items-start">
           <div className="flex text-left mb-[30px] gap-5">
-            {user.profileImage ? (
-              <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
-                <img
-                  id="image-preview"
-                  src={formik.values.profileImage ? import.meta.env.VITE_IMAGE_URL + formik.values.profileImage : ''}
-                  alt="Preview"
-                  className={`w-full h-full object-cover ${formik.values.profileImage ? '' : 'hidden'}`}
-                />
-                {!formik.values.profileImage && (
-                  <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
-                    <FaUpload />
-                    <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
-                  </div>
-                )}
-                <input
-                  onChange={(e) => {
-                    if (e.target.files[0]) {
-                      formik.setFieldValue('image', e.target.files[0])
-                    }
-                  }}
-                  type="file"
-                  name="image"
-                  className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-                />
-              </label>
-            ) : (
-              <FaUserCircle className="text-main text-[70px] mx-auto" />
-            )}
-
+            <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
+              <img
+                id="image-preview"
+                src={formik.values.profileImage ? import.meta.env.VITE_IMAGE_URL + formik.values.profileImage : ''}
+                alt="Preview"
+                className={`w-full h-full object-cover ${formik.values.profileImage ? '' : 'hidden'}`}
+              />
+              {!formik.values.profileImage && (
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
+                  <FaUpload />
+                  <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
+                </div>
+              )}
+              <input
+                onChange={(e) => {
+                  if (e.target.files[0]) {
+                    formik.setFieldValue('image', e.target.files[0])
+                  }
+                }}
+                type="file"
+                name="image"
+                className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            </label>
             <div>
               <h3 className="text-[16px]">Slika Administratora</h3>
               <span className="text-[10px] text-spanGray">Slika administratora maksimalna veličina do 10MB</span>
@@ -132,24 +127,25 @@ function DashboardSettingsProfile() {
               />
             </div>
 
-            <div className="flex flex-col lg:flex-row items-center w-[100%] justify-between">
-              <label>
-                Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
-              </label>
-              <select
-                value={formik.values.title}
-                onChange={formik.handleChange}
-                name="title"
-                className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[200px]">
-                <option value="" disabled>
-                  Select Poziciju...
-                </option>
-                <option value="admin">Admin</option>
-                <option value="funkcioner">Funkcioner</option>
-                {/* Add more options as needed */}
-              </select>
-            </div>
-
+            {user.role === 'admin' && (
+              <div className="flex flex-col lg:flex-row items-center w-[100%] justify-between">
+                <label>
+                  Pozicija <span className="text-red italic text-[13px]">{showError('title')}</span>
+                </label>
+                <select
+                  value={formik.values.title}
+                  onChange={formik.handleChange}
+                  name="title"
+                  className="border border-1 border-main rounded-xl px-3 py-2 w-auto lg:w-[49%]">
+                  <option value="" disabled>
+                    Select Poziciju...
+                  </option>
+                  <option value="admin">Admin</option>
+                  <option value="funkcioner">Funkcioner</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+            )}
             <div className="flex flex-col lg:flex-row items-center w-[100%] justify-between">
               <label>
                 Telefon <span className="text-red italic text-[13px]">{showError('phone')}</span>
