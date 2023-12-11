@@ -7,6 +7,7 @@ import {MapData} from './MapData'
 import MapSideBar from '../../components/MapSideBar/MapSideBar'
 import MunicipalityService from '../../services/municipalityService'
 import logo from '../../assets/Logo-compress.png'
+import ps_logo from '../../assets/ps_logo.png'
 import {storeAllMunicipalities} from '../../store/municipalitySlice'
 
 function Map() {
@@ -135,6 +136,9 @@ function Map() {
 
           <div className="absolute top-2 left-[30px] z-0 hidden lg:block">
             <img src={logo} className="w-[160px]" />
+          </div>
+          <div className="absolute bottom-0 left-[30px] z-0 hidden lg:block">
+            <img src={ps_logo} className="w-[140px]" />
           </div>
         </div>
 
