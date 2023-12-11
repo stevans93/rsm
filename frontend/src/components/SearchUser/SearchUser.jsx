@@ -15,7 +15,7 @@ function SearchUser({setPageSize, getData}) {
   const user = JSON.parse(localStorage.getItem('rsm_user'))
 
   let KB = 1024
-  let MB = KB * 1024
+  let MB = KB * 1024 * 10
 
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')

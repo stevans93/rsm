@@ -9,7 +9,7 @@ function DashboardSettingsProfile() {
 
   const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
   let KB = 1024
-  let MB = KB * 1024
+  let MB = KB * 1024 * 10
 
   // const [eventImage, setEventImage] = useState(null)
 
@@ -30,7 +30,6 @@ function DashboardSettingsProfile() {
       title: Yup.string().required('Polje je obavezno...'),
       phone: Yup.string().required('Polje je obavezno...'),
       profileImage: Yup.mixed()
-        .required('Polje je obavezno...')
         .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
         .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
     },
