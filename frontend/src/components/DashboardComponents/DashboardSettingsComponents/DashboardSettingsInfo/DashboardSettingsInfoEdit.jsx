@@ -38,7 +38,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
       numberOfOfficials: singleManic.numberOfOfficials || '',
       website: singleManic.website || '',
       numberOfApplications: singleManic.numberOfApplications || '',
-      image: ''
+      image: singleManic.image || ''
     },
 
     validationSchema: Yup.object({
@@ -51,10 +51,10 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
       phone: Yup.string(),
       numberOfOfficials: Yup.string(),
       website: Yup.string(),
-      numberOfApplications: Yup.string(),
-      image: Yup.mixed()
-        .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 10)
-        .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
+      numberOfApplications: Yup.string()
+      // image: Yup.mixed()
+      //   .test('fileSize', 'Wrong file size', (value) => !(value && value?.size < MB * 10))
+      //   .test('fileType', 'Wrong file type', (value) => !(value && VALID_TYPE.includes(value.type)))
     }),
 
     enableReinitialize: true,
@@ -103,7 +103,7 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
           <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
             <img
               id="image-preview"
-              src={formik.values.image ? URL.createObjectURL(formik.values.image) : ''}
+              src={formik.values.image ? import.meta.env.VITE_IMAGE_URL + formik.values.image : ''}
               alt="Preview"
               className={`w-full h-full object-cover ${formik.values.image ? '' : 'hidden'}`}
             />
@@ -124,12 +124,12 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
               className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
             />
           </label>
-        </div>
-        <div>
-          <h3 className="text-[16px]">Slika Predsednika</h3>
-          <span className="text-[10px] text-spanGray">Profilna slika maksimalna veličina do 10MB</span>
-          <br />
-          <span className="text-red italic text-[13px]">{showError('image')}</span>
+          <div>
+            <h3 className="text-[16px]">Slika Gradonačelnik/Predsednik opštine</h3>
+            <span className="text-[10px] text-spanGray">Profilna slika maksimalna veličina do 10MB</span>
+            <br />
+            <span className="text-red italic text-[13px]">{showError('image')}</span>
+          </div>
         </div>
 
         <div className="flex flex-col items-center w-full">
@@ -298,7 +298,9 @@ function DashboardSettingsInfo({showCloseBtn, setShowEditModal, municipalityId, 
             </div>
           </div>
 
-          <button className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
+          <button
+            type="submit"
+            className="mt-[30px] border border-1 border-main px-5 py-2 rounded-xl text-main hover:bg-main hover:text-[#fff]">
             Izmeni Podatke
           </button>
         </div>

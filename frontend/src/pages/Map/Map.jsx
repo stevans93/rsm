@@ -138,7 +138,7 @@ function Map() {
             <img src={logo} className="w-[160px]" />
           </div>
           <div className="absolute bottom-0 left-[30px] z-0 hidden lg:block">
-            <img src={ps_logo} className="w-[140px]" />
+            <img src={ps_logo} className="w-[95px]" />
           </div>
         </div>
 

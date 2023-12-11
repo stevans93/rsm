@@ -11,7 +11,7 @@ function DashboardSettingsUser() {
   const user = JSON.parse(localStorage.getItem('rsm_user'))
 
   let KB = 1024
-  let MB = KB * 1024
+  let MB = KB * 1024 * 10
 
   const formik = useFormik({
     initialValues: {
@@ -33,8 +33,8 @@ function DashboardSettingsUser() {
       phone: Yup.string().required('Polje je obavezno...'),
       image: Yup.mixed()
         .required('Polje je obavezno...')
-        .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 10)
-        .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
+        .test('fileSize', 'Wrong file size', (value) => !(value && value?.size < MB * 10))
+        .test('fileType', 'Wrong file type', (value) => !(value && VALID_TYPE.includes(value?.type)))
     }),
 
     onSubmit: async (values) => {

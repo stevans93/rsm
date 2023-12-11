@@ -75,7 +75,7 @@ function DashboardSettingsDesktop() {
                   <TbUserSquareRounded className="text-5xl text-main bg-[#fff] rounded-xl" />
                   <div className="flex flex-col">
                     <p className={`text-[24px] ${activeItem === 'profile' ? 'text-[#fff]' : 'text-main'}`}>
-                      Administrator
+                      {user.role === 'admin' ? 'Administrator' : 'Profil'}
                     </p>
                     <span className={`text-[12px] ${activeItem === 'profile' ? 'text-[#fff]' : 'text-spanGray'}`}>
                       Slika, Ime, Prezime, Email, Pozicija
@@ -107,46 +107,57 @@ function DashboardSettingsDesktop() {
                   className={`text-3xl arrow ${activeItem === 'password' ? 'text-[#fff]' : 'text-main'}`}
                 />
               </div>
-              <div
-                className={`flex w-[350px] justify-between border border-1 border-[#D6D9D9] items-center p-3 rounded-3xl divHover ${
-                  activeItem === 'user' ? 'bg-main' : ''
-                }`}
-                onClick={() => {
-                  handleItemClick('user')
-                  handleUserClick()
-                }}>
-                <div className="flex items-center gap-5">
-                  <PiUsersThree className="text-5xl text-main bg-[#fff] rounded-xl" />
-                  <div>
-                    <p className={`text-[24px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`}>Funkcioneri</p>
-                    <span className={`text-[12px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-spanGray'}`}>
-                      Dodavanje koordinatora/funkcionera
-                    </span>
+              {user.role === 'admin' && (
+                <>
+                  <div
+                    className={`flex w-[350px] justify-between border border-1 border-[#D6D9D9] items-center p-3 rounded-3xl divHover ${
+                      activeItem === 'user' ? 'bg-main' : ''
+                    }`}
+                    onClick={() => {
+                      handleItemClick('user')
+                      handleUserClick()
+                    }}>
+                    <div className="flex items-center gap-5">
+                      <PiUsersThree className="text-5xl text-main bg-[#fff] rounded-xl" />
+                      <div>
+                        <p className={`text-[24px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`}>
+                          Funkcioneri
+                        </p>
+                        <span className={`text-[12px] ${activeItem === 'user' ? 'text-[#fff]' : 'text-spanGray'}`}>
+                          Dodavanje koordinatora/funkcionera
+                        </span>
+                      </div>
+                    </div>
+                    <MdArrowForward
+                      className={`text-3xl arrow ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`}
+                    />
                   </div>
-                </div>
-                <MdArrowForward className={`text-3xl arrow ${activeItem === 'user' ? 'text-[#fff]' : 'text-main'}`} />
-              </div>
-              <div
-                className={`flex w-[350px] justify-between border border-1 border-[#D6D9D9] items-center p-3 rounded-3xl divHover ${
-                  activeItem === 'info' ? 'bg-main' : ''
-                }`}
-                onClick={() => {
-                  handleItemClick('info')
-                  handleInfoClick()
-                }}>
-                <div className="flex items-center gap-5">
-                  <FaInfo className="text-5xl text-main bg-[#fff] rounded-xl" />
-                  <div>
-                    <p className={`text-[24px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`}>
-                      Unos podataka
-                    </p>
-                    <span className={`text-[12px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-spanGray'}`}>
-                      Dodavanje Podataka
-                    </span>
+
+                  <div
+                    className={`flex w-[350px] justify-between border border-1 border-[#D6D9D9] items-center p-3 rounded-3xl divHover ${
+                      activeItem === 'info' ? 'bg-main' : ''
+                    }`}
+                    onClick={() => {
+                      handleItemClick('info')
+                      handleInfoClick()
+                    }}>
+                    <div className="flex items-center gap-5">
+                      <FaInfo className="text-5xl text-main bg-[#fff] rounded-xl" />
+                      <div>
+                        <p className={`text-[24px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`}>
+                          Unos podataka
+                        </p>
+                        <span className={`text-[12px] ${activeItem === 'info' ? 'text-[#fff]' : 'text-spanGray'}`}>
+                          Dodavanje Podataka
+                        </span>
+                      </div>
+                    </div>
+                    <MdArrowForward
+                      className={`text-3xl arrow ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`}
+                    />
                   </div>
-                </div>
-                <MdArrowForward className={`text-3xl arrow ${activeItem === 'info' ? 'text-[#fff]' : 'text-main'}`} />
-              </div>
+                </>
+              )}
             </div>
           </div>
         </div>

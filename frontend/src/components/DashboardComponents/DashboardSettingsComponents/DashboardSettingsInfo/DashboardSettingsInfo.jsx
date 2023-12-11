@@ -10,7 +10,7 @@ import {useFormik} from 'formik'
 function DashboardSettingsInfo({showCloseBtn, setShowEditModal}) {
   const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
   let KB = 1024
-  let MB = KB * 1024
+  let MB = KB * 1024 * 10
 
   const formik = useFormik({
     initialValues: {

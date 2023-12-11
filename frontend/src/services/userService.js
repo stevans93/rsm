@@ -15,6 +15,8 @@ class UserService {
         });
     };
 
+    static editUser = (body) => axios.post('/user', body, { headers: { 'Content-Type': 'multipart/form-data' } })
+
     static changePassword = (body) => axios.put('/user/changePassword', body)
 
     static deleteUser = (id) => axios.delete(`/user/${id}`)
