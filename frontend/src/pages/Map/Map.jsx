@@ -128,12 +128,12 @@ function Map() {
           </svg>
 
           {hoveredTitle && (
-            <div className="absolute md:left-[36%] mx-auto top-[5px] text-sm md:text-base md:top-[1px] md:w-[40%] text-center lg:w-[300px] lg:left-[45%] text-2xl w-[60%] left-[20%] font-bold text-main shadow right-[450px] bg-[#fff] p-4 rounded-2xl">
+            <div className="absolute md:left-[36%] mx-auto top-[5px] md:text-base md:top-[1px] md:w-[40%] text-center lg:w-[300px] lg:left-[55%] text-2xl w-[60%] left-[20%] font-bold text-main shadow right-[450px] bg-[#fff] p-4 rounded-2xl">
               {hoveredTitle}
             </div>
           )}
 
-          <div className="absolute bottom-2 left-[30px] z-0">
+          <div className="absolute top-2 left-[30px] z-0 hidden lg:block">
             <img src={logo} className="w-[160px]" />
           </div>
         </div>

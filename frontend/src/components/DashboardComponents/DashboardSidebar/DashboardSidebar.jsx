@@ -1,16 +1,14 @@
 import {FaCity, FaUserCircle} from 'react-icons/fa'
 import {Link, NavLink, useNavigate} from 'react-router-dom'
-import React, {useEffect, useRef, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import {useEffect, useRef, useState} from 'react'
 
-import InfoAboutTheCity from '../../InfoAboutTheCity/InfoAboutTheCity'
-import InfoAboutTheCityMobile from '../../InfoAboutTheCity/InfoAboutTheCityMobile'
 import {IoIosArrowBack} from 'react-icons/io'
 import {IoSettingsOutline} from 'react-icons/io5'
 import {PiUsersThree} from 'react-icons/pi'
 import {TfiMenu} from 'react-icons/tfi'
 import {logOutUser} from '../../../store/userSlice'
 import logo from '../../../assets/Logo-compress.png'
+import {useDispatch} from 'react-redux'
 
 function DashboardSidebar() {
   const user = JSON.parse(localStorage.getItem('rsm_user'))
@@ -89,7 +87,18 @@ function DashboardSidebar() {
         </div>
         <div className="flex flex-col gap-8">
           <div className="flex gap-3">
-            <FaUserCircle className="text-main text-[50px] mx-auto" />
+            {user.profileImage ? (
+              <label className="relative  bg-white border border-spanGray  h-[70px] overflow-hidden rounded-full">
+                <img
+                  id="image-preview"
+                  src={user.profileImage ? import.meta.env.VITE_IMAGE_URL + user.profileImage : ''}
+                  alt="Preview"
+                  className={`w-full h-full object-cover ${user.profileImage ? '' : 'hidden'}`}
+                />
+              </label>
+            ) : (
+              <FaUserCircle className="text-main text-[70px] mx-auto" />
+            )}
             <div className="flex flex-col justify-center">
               <p className="text-main font-bold">
                 {user?.firstName} {user?.lastName}

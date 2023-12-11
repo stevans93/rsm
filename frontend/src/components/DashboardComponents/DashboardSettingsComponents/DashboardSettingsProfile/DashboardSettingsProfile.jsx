@@ -1,14 +1,15 @@
 import * as Yup from 'yup'
 
-import {FaUserCircle} from 'react-icons/fa'
+import {FaUpload, FaUserCircle} from 'react-icons/fa'
+
 import {useFormik} from 'formik'
 
 function DashboardSettingsProfile() {
   const user = JSON.parse(localStorage.getItem('rsm_user'))
 
-  // const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png'];
-  // let KB = 1024;
-  // let MB = KB * 1024;
+  const VALID_TYPE = ['image/jpeg', 'image/jpg', 'image/png']
+  let KB = 1024
+  let MB = KB * 1024
 
   // const [eventImage, setEventImage] = useState(null)
 
@@ -18,8 +19,8 @@ function DashboardSettingsProfile() {
       lastName: '' || user.lastName,
       email: '' || user.email,
       title: '' || user.title,
-      phone: '' || user.phone
-      // profileImage: '',
+      phone: '' || user.phone,
+      profileImage: '' || user.profileImage
     },
 
     validate: {
@@ -27,11 +28,11 @@ function DashboardSettingsProfile() {
       lastName: Yup.string().required('Polje je obavezno...'),
       email: Yup.string().required('Polje je obavezno...'),
       title: Yup.string().required('Polje je obavezno...'),
-      phone: Yup.string().required('Polje je obavezno...')
-      // profileImage: Yup.mixed()
-      //   .required('Polje je obavezno...')
-      //   .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
-      //   .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
+      phone: Yup.string().required('Polje je obavezno...'),
+      profileImage: Yup.mixed()
+        .required('Polje je obavezno...')
+        .test('fileSize', 'Wrong file size', (value) => value && value.size < MB * 2)
+        .test('fileType', 'Wrong file type', (value) => value && VALID_TYPE.includes(value.type))
     },
 
     onSubmit: (values) => {
@@ -54,18 +55,30 @@ function DashboardSettingsProfile() {
         <div className="flex flex-col items-start">
           <div className="flex text-left mb-[30px] gap-5">
             {user.profileImage ? (
-              {
-                /* <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
-              <img id="image-preview" src={formik.values.image ? URL.createObjectURL(formik.values.image) : ''} alt="Preview" className={`w-full h-full object-cover ${formik.values.image ? '' : 'hidden'}`} />
-              {!formik.values.image && (
-                <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
-                  <FaUpload />
-                  <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
-                </div>
-              )}
-              <input onChange={(e) => { if (e.target.files[0]) { formik.setFieldValue('image', e.target.files[0]); setEventImage(e.target.files[0]); } }} type="file" name="image" className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"/>         
-            </label> */
-              }
+              <label className="relative cursor-pointer bg-white border border-spanGray w-[100px] h-[100px] overflow-hidden rounded-xl">
+                <img
+                  id="image-preview"
+                  src={formik.values.profileImage ? import.meta.env.VITE_IMAGE_URL + formik.values.profileImage : ''}
+                  alt="Preview"
+                  className={`w-full h-full object-cover ${formik.values.profileImage ? '' : 'hidden'}`}
+                />
+                {!formik.values.profileImage && (
+                  <div className="absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center cursor-pointer">
+                    <FaUpload />
+                    <span className="text-gray-400 mt-2 text-[11px]">Otpremi Sliku</span>
+                  </div>
+                )}
+                <input
+                  onChange={(e) => {
+                    if (e.target.files[0]) {
+                      formik.setFieldValue('image', e.target.files[0])
+                    }
+                  }}
+                  type="file"
+                  name="image"
+                  className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+                />
+              </label>
             ) : (
               <FaUserCircle className="text-main text-[70px] mx-auto" />
             )}

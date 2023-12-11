@@ -2,7 +2,7 @@ import React from 'react'
 
 function MapSideBar({handleToggleInfo, selectedTitle, selectedMunicipality}) {
   return (
-    <div className={`w-full h-full bg-[#fff] rounded-2xl shadow relative p-2`}>
+    <div className={`w-full h-[82svh] overflow-scroll bg-[#fff] rounded-2xl shadow relative p-2`}>
       {selectedMunicipality && (
         <div>
           {/* <p>Okrug: {selectedTitle}</p> <br /> */}

@@ -23,7 +23,7 @@ function InfoAboutTheCity({closeModal, cityInfo}) {
 
           <div className="flex w-[60%] flex-col gap-3 ">
             <p className="text-[14px]">
-              Gradonačelnik/predsednik opštine:{' '}
+              Gradonačelnik/Predsednik opštine:{' '}
               <span className="text-spanGray">{cityInfo?.fullNameOfThePresident}</span>{' '}
             </p>
             <p className="text-[14px]">

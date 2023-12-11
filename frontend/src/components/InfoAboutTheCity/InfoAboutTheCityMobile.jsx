@@ -26,7 +26,7 @@ function InfoAboutTheCityMobile({closeModal, cityInfo}) {
 
         <div className="flex flex-col gap-3 mr-14">
           <p className="text-[14px]">
-            Gradonačelnik/predsednik opštine: <span className="text-spanGray">{cityInfo?.fullNameOfThePresident}</span>{' '}
+            Gradonačelnik/Predsednik opštine: <span className="text-spanGray">{cityInfo?.fullNameOfThePresident}</span>{' '}
           </p>
           <p className="text-[14px]">
             Zamimanje: <span className="text-spanGray">{cityInfo?.profession}</span>{' '}
