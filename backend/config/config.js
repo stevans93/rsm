@@ -12,7 +12,7 @@ module.exports = {
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'DELETE', 'HEAD', 'PATCH'],
         },
         corsOptionsProd: {
-            origin: ['*', 'https://rsm.digitalhousepower.rs'],
+            origin: ['https://rsm.digitalhousepower.rs'],
             methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'DELETE', 'HEAD', 'PATCH'],
         },
     }
